@@ -1,0 +1,114 @@
+\documentclass[10pt, a4paper]{beamer}
+\usepackage{graphicx}
+\usetheme{Berkeley}
+\usecolortheme{sidebartab}
+
+\begin{document}
+	\setbeamertemplate{sidebar left}{}
+	\title{Progress Presentation-I}
+	\subtitle{e-Yantra Summer Internship-2019 \\ Auto Tagging Algorithm 2.0}
+	\author{Anuj Trehan\\Mentors : Sharad Mishra, Tenzin Dhekyong}
+	\institute{IIT Bombay}
+	\date{\today}
+	%\addtobeamertemplate{sidebar left}{}{\includegraphics[scale = 0.3]{logowithtext.png}}
+	\frame{\titlepage}
+
+\setbeamertemplate{sidebar left}[sidebar theme]
+\section{Overview of Project}
+\begin{frame}{Overview of Project}
+	\begin{itemize}
+		\item \textbf{Project Name :} Auto Tagging Algorithm 2.0
+		\item \textbf{Objective :} Accurately predicting the difficulty levels of question mapped manually or changing it according to features and reading its performance over time.
+
+		\item \textbf{Deliverables :} Documentation and analysis of different techniques and there accuracy in comparison with themselves.
+	\end{itemize}
+\end{frame}
+
+\section{Overview of Task}
+\begin{frame}{Overview of Task}
+	\begin{tabular}{|l|l|l|}
+		\hline
+		S.No & Task & Deadline\\
+		\hline
+		1 & Reading the research paper & 1 Day \\
+		\hline
+		2 & Understanding the data and making DB connector & 1 Day  \\
+		\hline
+		3 & Feature creation from database & 2 Days \\
+		\hline
+		4 & Implementing unsupervised learning techniques & 8 days \\
+		\hline
+		5 & Calculate accuracy and performance of the result & 2 days\\
+		\hline
+		6 & Testing of algo for performance improvement & 3 days\\
+		\hline
+		7 & Integrating with REST or HTTP API & 1-2 days\\
+		\hline
+		8 & Making analytics dashboard & 4 days\\
+		\hline
+		9 & Debugging of Software Stack & 2 days\\
+		\hline
+		10 & Testing/Documentation & 3 days\\
+		\hline
+	\end{tabular}
+\end{frame}
+
+\section{Task Accomplished}
+\begin{frame}{Task Accomplished}
+	\begin{itemize}
+		\item Read and understood \textit{Auto-Tagging for Massive Online Selection Tests: Machine Learning to the Rescue}.  
+		\item DB connector was made in python.
+		\item Features were made from the database.
+		\item K-Means Clustering algorithm was applied on the features and accuracy was calculated.
+	\end{itemize}
+\end{frame}
+
+\section{Challenges Faced}
+\begin{frame}{Challenges Faced}
+	\begin{itemize}
+		
+		\item Understanding the whole database to find out important tables.There were 10 tables in the database but only \textbf{4} of them were needed.\\ 
+		
+		\item Making Features from different tables and import it into python.This was the most important step as it forms the base for our model.\textbf{Good data promises good models.}\\ 
+		
+		\item Calculating the features from research paper was time consuming. Firstly we have to \textbf{calculate weights for each student and also map each question to the students who answered them} and then calculate the features.Shown below are  equations :- \\
+		\begin{equation}
+		    F_{k}^{(1)} = \frac{\sum_{s\in S} w_{s} f_{k}^{(1)} (D_{k}^{(s)})}{\sum_{s\in S} w_{s}}
+		\end{equation}
+		\\
+		\begin{equation}
+		    F_{k}^{(2)} = \frac{\sum_{s\in S} w_{s} m_{s} f_{k}^{(2)} (D_{k}^{(s)})}{\sum_{s\in S} w_{s}}
+		\end{equation}
+		
+	\end{itemize}
+	
+\end{frame}
+\begin{frame}{Challenges Faced (cont...)}
+	\begin{itemize}
+		\item When K-Means clustering was applied to the features the label assigned to the cluster was changing which changed the whole metric on each run.\\
+		\begin{center}
+		\includegraphics[width=2cm, height=2cm]{first_run.png}\\
+		FIRST RUN
+	\end{center}
+		\begin{center}
+		\includegraphics[width=2cm, height=2cm]{second_run.png}\\
+		SECOND RUN
+	\end{center}
+	\end{itemize}
+\end{frame}
+
+\section{Future Plans}
+\begin{frame}{Future Plans}
+	\begin{itemize}
+		\item Applying more learning models to the dataset like Autoencoder pretraining,competitive learning etc.
+		\item Bind the model into a REST API and communicate with a frontend.
+		\item Making a simple dashboard
+	\end{itemize}
+\end{frame}
+
+
+\section{Thank You}
+\begin{frame}{Thank You}
+	\centering THANK YOU !!!
+\end{frame}
+\end{document}
