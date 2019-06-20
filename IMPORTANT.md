@@ -31,6 +31,7 @@
   - **Read about the possible solutions**.
 ### 11/06/19
   - **Found and applied the solution to the problem faced above**.
+  - Got an accuaracy of 
   - Started reading about autoencoder pretraining for clustering [from here](https://www.dlology.com/blog/how-to-do-unsupervised-clustering-with-keras/)
 ### 12/06/19
   - **Applied the autoencoder approach and checked its performance**.
@@ -40,5 +41,12 @@
   - Started reading about the Competitive Learning approach.[some references](http://labs.seas.wustl.edu/bme/raman/Lectures/Lecture10_CompetitiveLearning.pdf).
 ### 15/06/19
   - Read about the Kohonen SOM from various sources.
-  - **Applied the above approach to our dataset**.
-  - Read about flask.
+  - **Applied the above approach to our dataset.**.
+### 17/06/19
+  - **Optimization of algorithm.**
+  - Read about flask
+### 18/06/19
+  - Worked on flask to change the database
+  - Learnt JavaScript
+  - Made SQL queries for the flask backend
+  - Read about CRUD APIs
