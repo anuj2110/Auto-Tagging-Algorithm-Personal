@@ -50,3 +50,17 @@
   - Learnt JavaScript
   - Made SQL queries for the flask backend
   - Read about CRUD APIs
+### 19/06/19
+  - **Major Bug Fix.**
+  - Added the model to the flask API (to be engineered).
+  - Got stuck at some integrity issues.
+### 20/06/19
+  - Made Modular functions for feature generation and saving them in database
+  - Added a dummy form to the flask app
+  - Studied about Node JS
+### 21/06/19
+  - Learnt about express basics
+  - Made a simple Login Form and made it's backend in node and express.
+  - Styled the login form a little
+  - Started working on home page
+  
