@@ -61,6 +61,14 @@
 ### 21/06/19
   - Learnt about express basics
   - Made a simple Login Form and made it's backend in node and express.
-  - Styled the login form a little
-  - Started working on home page
+  - Styled the login form a little.
+  - Worked on displaying data in table.
+### 22/06/19
+  - Made a table frontend for the web app.
+  - Learned about express handlebars.
+  - Applied handlebars to the web html.
+### 24/06/19 
+  - Learned about Passport JS.
+  - Applied better authentication to the login system.
+  - Started working on admin page.
   
