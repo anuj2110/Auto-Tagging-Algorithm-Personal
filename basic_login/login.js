@@ -3,8 +3,9 @@ var express = require("express"); // for web development
 var session = require("express-session"); // for handling sessions
 var bodyParser = require("body-parser"); // to extract data from login page
 var mysql = require("mysql"); // for connecting to mysql database
+const auth = require("./service/passport");
 var path = require('path');
-
+const bcrypt = require('bcrypt-nodejs');
 //making the onnection to the databse
 var connection =  mysql.createConnection({
     host : "localhost",
@@ -21,6 +22,14 @@ connection.connect(function(err) {
     console.log('Connected to the MySQL server.');
   });
 
+
+// auth.serializeUser(function(user, done) {
+//   done(null, user);
+// });
+// auth.deserializeUser(function(user, done) {
+//   done(null, user);
+// });
+
 var app = express();//intializing the app
 
 //to let Express know we'll be using some of its packages
@@ -32,33 +41,32 @@ app.use(session({
 app.use(bodyParser.urlencoded({extended : true}));
 app.use(bodyParser.json());
 
+app.use(auth.initialize());
+app.use(auth.session());
+
+
 
 app.get('/',function(req,res){
-    res.sendFile(path.join(__dirname+"/login.html"));
+    res.sendFile(path.join(__dirname+"/templates/login.html"));
 });
 
-app.post('/auth',function(req,res){
-    var username = req.body.username;
-    var password = req.body.password;
-    if(username && password){
-        connection.query('SELECT * FROM login WHERE username = ? AND password = ?', [username, password],function(error,results,fields){
-            if (error) {
-                return console.error('error: ' + err.message);
-              }
-            if (results.length > 0) {
-				req.session.loggedin = true;
-				req.session.username = username;
-				res.redirect('/home');
-			} else {
-				res.send('Incorrect Username and/or Password!');
-			}			
-			res.end();
-        })
-    }
-    else {
-		res.send('Please enter Username and Password!');
-		res.end();
-	}
+app.post('/auth', (req, res, next) => {
+  console.log('Inside POST /login callback')
+  auth.authenticate('local-login', (err, user, info) => {
+    if(info) {return res.send(info.message)}
+    if (err) { return next(err); }
+    if (!user) { return res.redirect('/login'); }
+    req.login(user, (err) => {
+      console.log(user);
+      if (err) { req.session.destroy();
+        return next(err); 
+      }
+      req.session.loggedin = true;
+      req.session.username = req.body.username;
+      return res.redirect('/home');
+  })
+  })(req, res, next);
+  
 })
 
 app.get('/home', function(req, res) {
@@ -70,4 +78,4 @@ app.get('/home', function(req, res) {
 	res.end();
 })
 
-app.listen(3000)
+app.listen(3000) 
