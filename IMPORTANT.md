@@ -46,29 +46,35 @@
   - **Optimization of algorithm.**
   - Read about flask
 ### 18/06/19
-  - Worked on flask to change the database
+  - **Worked on flask to change the database**
   - Learnt JavaScript
-  - Made SQL queries for the flask backend
+  - **Made SQL queries for the flask backend**
   - Read about CRUD APIs
 ### 19/06/19
   - **Major Bug Fix.**
-  - Added the model to the flask API (to be engineered).
+  - **Added the model to the flask API (to be engineered).**
   - Got stuck at some integrity issues.
 ### 20/06/19
-  - Made Modular functions for feature generation and saving them in database
-  - Added a dummy form to the flask app
+  - **Made Modular functions for feature generation and saving them in database**
+  - **Added a dummy form to the flask app**
   - Studied about Node JS
 ### 21/06/19
-  - Learnt about express basics
-  - Made a simple Login Form and made it's backend in node and express.
-  - Styled the login form a little.
+  - **Learnt about express basics**
+  - **Made a simple Login Form and made it's backend in node and express.**
+  - **Styled the login form a little.**
   - Worked on displaying data in table.
 ### 22/06/19
   - Made a table frontend for the web app.
   - Learned about express handlebars.
   - Applied handlebars to the web html.
 ### 24/06/19 
-  - Learned about Passport JS.
-  - Applied better authentication to the login system.
+  - **Learned about Passport JS.**
+  - **Applied better authentication to the login system.**
   - Started working on admin page.
-  
+### 25/06/19
+  - Made Home Page.
+  - Added some style to it.
+  - Made Users page for the website.
+  - Made the feature form for sending the features required for prediction.
+  - Made backend for the form.
+
