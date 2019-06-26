@@ -76,5 +76,10 @@
   - Added some style to it.
   - Made Users page for the website.
   - Made the feature form for sending the features required for prediction.
-  - Made backend for the form.
+  - **Made backend for the form.**
+### 26/06/19
+  - Learnt about axios.
+  - **Made the connection to flask api.**
+  - Learnt about Chart.js.
+  - Made new Database for statistics.
 
