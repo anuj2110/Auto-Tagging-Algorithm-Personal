@@ -9,6 +9,7 @@ const bodyParser = require('body-parser');
 //use mysql database
 const mysql = require('mysql');
 const session = require('express-session');
+const axios =  require('axios')
 const app = express();
 
 //Create Connection
@@ -91,6 +92,7 @@ app.get('/predict',(req,res)=>{
 })
 app.post('/predict',(req,res)=>{
   var features = [];
+  var message = '';
   var dummy = [req.body.year,
     req.body.correctly_answered,
     req.body.incorretly_answered,
@@ -106,9 +108,20 @@ app.post('/predict',(req,res)=>{
             features = features.concat(dummy[i]);
           }
   }
-  item = JSON.stringify(features)
-  console.log(item)
-  res.render("Predict");
+  //item = JSON.stringify(features)
+  //console.log(item)
+  axios.post("http://127.0.0.1:5000/",{features})
+.then(function (response) {
+        console.log(response.data)
+        messsage=response.data;
+// I need this data here ^^
+return response.data;
+})
+
+  res.render("Predict",{message:message});
+})
+app.get('/stats',(req,res)=>{
+  res.render("stats");
 })
 //server listening
 app.listen(8000, () => {
