@@ -1,3 +1,8 @@
+/*MAKING THE IMPORTS FOR THE APP*/ 
+
+// Option 1: Passing parameters separately
+
+
 //use path module
 const path = require('path');
 //use express module
@@ -9,25 +14,33 @@ const bodyParser = require('body-parser');
 //use mysql database
 const mysql = require('mysql');
 const session = require('express-session');
-const axios =  require('axios')
+const axios =  require('axios');
+const Sequelize = require('sequelize');
 const app = express();
 
-//Create Connection
+//HERE WE USE THE MYSQL MODULE TO CREATE CONNECTION TO THE DB
 const conn = mysql.createConnection({
   host: 'localhost',
   user: 'anuj',
   password: 'Anuj@21101998',
   database: 'user'
 });
-
-//connect to database
+const sequelize = new Sequelize('stats', 'anuj', 'Anuj@21101998', {
+  host: 'localhost',
+  dialect:'mysql' /* one of 'mysql' | 'mariadb' | 'postgres' | 'mssql' */
+});
+//HERE WE CONNECT TO THE DATABASE
 conn.connect((err) =>{
   if(err) throw err;
   console.log('Mysql Connected...');
 });
-
-hbs.registerPartials(__dirname + '/views/partials');
-//set views file
+// conn2.connect((err) =>{
+//   if(err) throw err;
+//   console.log('Mysql Connected...');
+// });
+//CONFIGURING THE APP FOR VARIOUS USE CASES
+hbs.registerPartials(__dirname + '/views/partials');//RE
+//set views fileGI
 app.set('views',path.join(__dirname,'views'));
 //set view engi
 app.set('view engine', 'hbs');
@@ -112,17 +125,107 @@ app.post('/predict',(req,res)=>{
   //console.log(item)
   axios.post("http://127.0.0.1:5000/",{features})
 .then(function (response) {
-        console.log(response.data)
+        console.log("response.data");
         messsage=response.data;
 // I need this data here ^^
-return response.data;
-})
+  console.log(message);
 
-  res.render("Predict",{message:message});
+}).catch((err)=>{console.log(err.message)
+return res.redirect('back')})
+res.render("Predict",{message:message})
 })
 app.get('/stats',(req,res)=>{
-  res.render("stats");
+  sequelize.query("select * from stats_2018").then(([results, metadata]) => {
+    // Results will be an empty array and metadata will contain the number of affected rows.
+    let array=[]
+    return results;
+    //console.log(array);
+    
+   // console.log(metadata[0].KMeans_labels);
+  }).then(results=>{
+    console.log("after");
+    res.render("stats",{data: JSON.stringify(results)})
 })
+  
+})
+app.get('/stats_data',(req,res)=>{
+//   kmeans_tag= []
+//   conn2.query("select KMeans_labels from stats_2018",(err, results) => {
+//       if(err) throw err;
+//       var r = [];
+//       Object.keys(results).forEach(function(key) {
+//           var row = results[key];
+//           r = r.concat(row["KMeans_labels"])
+//         });
+//         kmeans_tag= r
+//   }
+//   );
+//   console.log(kmeans_tag)
+//   SOM_tag= []
+//   conn2.query("select SOM_labels from stats_2018",(err, results) => {
+//       if(err) throw err;
+//       var r = [];
+//       Object.keys(results).forEach(function(key) {
+//           var row = results[key];
+//           r = r.concat(row["SOM_labels"])
+//         });
+//         SOM_tag= r
+//   }
+//   );
+//   console.log(SOM_tag)
+//   var kmeans_acc =0;
+//   conn2.query("select accuracy_KMeans from accuracy_2018",(err, results) => {
+//     if(err) throw err;
+//     var r = 0;
+//     Object.keys(results).forEach(function(key) {
+//         var row = results[key];
+//         r = row["accuracy_KMeans"]
+//       });
+//       kmeans_acc = r;
+// }
+// );
+// console.log(kmeans_acc)
+// var som_acc=0;
+//   conn2.query("select accuraacy_SOM from accuracy_2018",(err, results) => {
+//     if(err) throw err;
+//     var r = 0;
+//     console.log(results);
+//     Object.keys(results).forEach(function(key) {
+//         var row = results[key];
+//         r = row["accuracy_SOM"]
+//       });
+//       som_acc = r;
+// });
+// console.log(som_acc)
+// kmeans_2 = kmeans_tag.filter(i => i === 2).length
+// kmeans_1 = kmeans_tag.filter(i => i === 1).length
+// kmeans_0 = kmeans_tag.filter(i => i === 0).length
+
+// SOM_2 = kmeans_tag.filter(i => i === 2).length
+// SOM_1 = kmeans_tag.filter(i => i === 1).length
+// SOM_0 = kmeans_tag.filter(i => i === 0).length
+// data ={
+//   'kmeans_tag' : kmeans_tag,
+//   'SOM_tag' : SOM_tag,
+//   'kmeans_acc' : kmeans_acc,
+//   'som_acc' : som_acc,
+//   'kmeans_2' : kmeans_2,
+//   'kmeans_1' : kmeans_2,
+//   'kmeans_0' : kmeans_2,
+//   'SOM_2' : SOM_2,
+//   'SOM_1' : SOM_1,
+//   'SOM_0' : SOM_0,
+// }
+// return JSON.stringify(data);
+sequelize.query("select * from stats_2018").then(([results, metadata]) => {
+  // Results will be an empty array and metadata will contain the number of affected rows.
+  let array=[]
+  return JSON.stringify(metadata)
+  //console.log(array);
+  
+ // console.log(metadata[0].KMeans_labels);
+})
+});
 //server listening
 app.listen(8000, () => {
   console.log('Server is running at port 8000');

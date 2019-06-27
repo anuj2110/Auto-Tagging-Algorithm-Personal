@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
-    <title>Collapsible sidebar using Bootstrap 4</title>
+    <title>Auto-Tagger</title>
 
     <!-- Bootstrap CSS CDN -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
@@ -23,6 +23,24 @@
     <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/fontawesome.js"
         integrity="sha384-6OIrr52G08NpOFSZdxxz1xdNSndlD4vdcf/q2myIUVO0VsqaGHJsB0RaBE01VTOY"
         crossorigin="anonymous"></script>
+    <style>
+            .container {
+                width: 50%;
+                height: 0.1%;
+            }
+            .container1 {
+                width: 50%;
+                height: 30%;
+            }
+            .container2 {
+                width: 50%;
+                height: 30%;
+            }
+            .container3 {
+                width: 50%;
+                height: 30%;
+            }
+        </style>
 
 </head>
 
@@ -33,24 +51,231 @@
         <!-- Page Content  -->
         <div id="content">
             {{>nav}}
-         </div>
+            <div class="container">
+                <canvas id="myChart" style="position:absolute; top:120px; left:60px"></canvas>
+            </div>
+            <div class="container1"style="position:absolute; top:600px; left:30px">
+                <canvas id="myChart1"></canvas>
+            </div>
+            <div class="container2"style="position:absolute; top:600px; left:500px">
+                <canvas id="myChart2"></canvas>
+            </div>
+            <div class="container3"style="position:absolute; top:1000px; left:250px">
+                <canvas id="myChart3"></canvas>
+            </div>
+        </div>
+
     </div>
 </body>
-<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
-        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
-        crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
-        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
-        crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
-        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
-        crossorigin="anonymous"></script>
-    <!-- jQuery Custom Scroller CDN -->
-    <script
-        src="https://cdnjs.cloudflare.com/ajax/libs/malihu-custom-scrollbar-plugin/3.1.5/jquery.mCustomScrollbar.concat.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.4.1.js" integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
+    crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+    integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+    crossorigin="anonymous"></script>
+<!-- jQuery Custom Scroller CDN -->
+<script
+    src="https://cdnjs.cloudflare.com/ajax/libs/malihu-custom-scrollbar-plugin/3.1.5/jquery.mCustomScrollbar.concat.min.js"></script>
 
-    <script src="/static/js/sidebar.js" type="text/javascript"></script>
-    
-</body>
+<script src="/static/js/sidebar.js" type="text/javascript"></script>
+<script src="/static/js/Chart.js" type="text/javascript"></script>
+<script>
+
+    $(document).ready(function () {
+        var data = {{{ data }}};
+        console.log("ready!");
+        console.log(data[0].KMeans_labels)
+        console.log(data.length)
+        var kmeans_labels = [];
+        var som_labels = [];
+        var original_labels = [];
+        for (var i = 0; i <data.length ; ++i) {
+            kmeans_labels = kmeans_labels.concat(data[i].KMeans_labels);
+            som_labels = som_labels.concat(data[i].SOM_labels);
+            original_labels = original_labels.concat(data[i].original);
+        }
+        console.log(kmeans_labels);
+        console.log(som_labels);    
+        var kmeans_acc = 0, som_acc = 0;
+        var kmeans_2 = 0, kmeans_1 = 0, kmeans_0 = 0;
+        var som_2 = 0, som_1 = 0, som_0 = 0;
+        var orig_2 = 0,orig_1 = 0,orig_0 = 0;
+        for (var i = 0; i < data.length; ++i) {
+            if(kmeans_labels[i]==2){
+                kmeans_2 = kmeans_2+1;
+            }else if(kmeans_labels[i]==1){
+                kmeans_1 = kmeans_1+1;
+            }else if(kmeans_labels[i]==0){
+                kmeans_0 = kmeans_0+1;
+            }
+            if(som_labels[i]==2){
+                som_2 = som_2+1;
+            }else if(som_labels[i]==1){
+                som_1 = som_1+1;
+            }else if(som_labels[i]==0){
+                som_0 = som_0+1;
+            }
+            if(original_labels[i]==2){
+                orig_2 = orig_2+1;
+            }else if(original_labels[i]==1){
+                orig_1 = orig_1+1;
+            }else if(original_labels[i]==0){
+                orig_0 = orig_0+1;
+            }
+        }
+        count = 0;
+        for (var i = 0; i < data.length; ++i){
+            if(kmeans_labels[i]==original_labels[i]){
+                count = count+1;
+            }
+        }
+        kmeans_acc = count/data.length;
+        count = 0;
+        for (var i = 0; i < data.length; ++i){
+            if(som_labels[i]==original_labels[i]){
+                count = count+1;
+            }
+        }
+        som_acc = count/data.length;
+        console.log(kmeans_acc);
+        console.log(som_acc);
+        var ctx = document.getElementById("myChart").getContext('2d');
+        // Define the data 
+        var data = [kmeans_acc,som_acc]; // Add data values to array
+
+        var labels = ["Accuracy_KMeans","Accuracy_SOM"]; // Add labels to array
+        var myChart = new Chart(ctx, {
+            type: 'horizontalBar',
+            data: {
+                labels: labels,
+                datasets: [{
+                    data: data, // Specify the data values array
+                    backgroundColor: [ // Specify custom colors
+                        'rgba(255, 99, 132, 0.2)',
+                        'rgba(54, 162, 235, 0.2)',
+                    ],
+                    borderColor: [ // Add custom color borders
+                        'rgba(255,99,132,1)',
+                        'rgba(54, 162, 235, 1)',
+                    ],
+                    borderWidth: 1 // Specify bar border width
+                }]
+            },
+            options: {
+                responsive: true, // Instruct chart js to respond nicely.
+                maintainAspectRatio: true,
+                scales: {
+                xAxes: [{
+                    ticks: {
+                        beginAtZero: true
+                    }
+                }]                
+            },
+            title: {
+                display: true,
+                text: "ACCURACY OF LABELLING"
+            }
+        }
+    });
+    var labels_pie_k = ["No. of 2s","No of 1s","No of 0s"];
+    var data_pie_k= [
+        kmeans_2,kmeans_1,kmeans_0
+    ];
+    var pie = document.getElementById("myChart1").getContext('2d');
+    var myChart = new Chart(pie, {
+        type: 'pie',
+        data: {
+            labels: labels_pie_k,
+            datasets: [
+                {
+                    data: data_pie_k,
+                    backgroundColor: [ // Specify custom colors
+                        'rgba(54, 162, 235, 0.2)',
+                        'rgba(255, 206, 86, 0.2)',
+                        'rgba(75, 192, 192, 0.2)'
+                    ],
+                    borderColor: [ // Add custom color borders
+                        'rgba(54, 162, 235, 1)',
+                        'rgba(255, 206, 86, 1)',
+                        'rgba(75, 192, 192, 1)'
+                    ],
+                    borderWidth: 1 
+                }
+            ]
+        },
+        options: {
+            title: {
+                display: true,
+                text: "Distribution of labels by KMeans"
+            }
+        }
+    });
+    var labels_pie_s = ["No. of 2s","No of 1s","No of 0s"];
+    var data_pie_s= [
+        som_2,som_1,som_0
+    ];
+    var pie = document.getElementById("myChart2").getContext('2d');
+    var myChart = new Chart(pie, {
+        type: 'pie',
+        data: {
+            labels: labels_pie_s,
+            datasets: [
+                {
+                    data: data_pie_s,
+                    backgroundColor: [ // Specify custom colors
+                        'rgba(54, 162, 235, 0.2)',
+                        'rgba(255, 206, 86, 0.2)',
+                        'rgba(75, 192, 192, 0.2)'
+                    ],
+                    borderColor: [ // Add custom color borders
+                        'rgba(54, 162, 235, 1)',
+                        'rgba(255, 206, 86, 1)',
+                        'rgba(75, 192, 192, 1)'
+                    ],
+                    borderWidth: 1 
+                }
+            ]
+        },
+        options: {
+            title: {
+                display: true,
+                text: "Distribution of labels by SOM"
+            }
+        }
+    });
+    var labels_pie_o = ["No. of 2s","No of 1s","No of 0s"];
+    var data_pie_o= [
+        orig_2,orig_1,orig_0
+    ];
+    var pie = document.getElementById("myChart3").getContext('2d');
+    var myChart = new Chart(pie, {
+        type: 'pie',
+        data: {
+            labels: labels_pie_o,
+            datasets: [
+                {
+                    data: data_pie_o,
+                    backgroundColor: [ // Specify custom colors
+                        'rgba(54, 162, 235, 0.2)',
+                        'rgba(255, 206, 86, 0.2)',
+                        'rgba(75, 192, 192, 0.2)'
+                    ],
+                    borderColor: [ // Add custom color borders
+                        'rgba(54, 162, 235, 1)',
+                        'rgba(255, 206, 86, 1)',
+                        'rgba(75, 192, 192, 1)'
+                    ],
+                    borderWidth: 1 
+                }
+            ]
+        },
+        options: {
+            title: {
+                display: true,
+                text: "Distribution of labels ORIGINAL"
+            }
+        }
+    });
+});
+</script>
 
 </html>
