@@ -1,5 +1,22 @@
 const passport = require("passport");
+const bcrypt = require('bcrypt-nodejs');
+const mysql = require("mysql"); 
 const LocalStrategy = require("passport-local").Strategy
+var connection =  mysql.createConnection({
+    host : "localhost",
+    user : "anuj",
+    password : "Anuj@21101998",
+    database : "user"
+})
+
+connection.connect(function(err) {
+    if (err) {
+      return console.error('error: ' + err.message);
+    }
+
+    console.log('Connected to the MySQL server.');
+  });
+
 var auth = passport.use(
     'local-login',
     new LocalStrategy({

@@ -17,7 +17,7 @@ const session = require('express-session');
 const axios =  require('axios');
 const Sequelize = require('sequelize');
 const app = express();
-
+const auth = require("./service/passport");
 //HERE WE USE THE MYSQL MODULE TO CREATE CONNECTION TO THE DB
 const conn = mysql.createConnection({
   host: 'localhost',
@@ -54,18 +54,32 @@ app.use(session({
 	resave: true,
 	saveUninitialized: true
 }));
-
+app.use(auth.initialize());
+app.use(auth.session());
 //route for homepage
-app.get('/',(req, res) => {
-  let sql = "SELECT * FROM product";
-  let query = conn.query(sql, (err, results) => {
-    if(err) throw err;
-    res.render('product_view',{
-      username:req.params.user,
-      results: results
-    });
-  });
+app.get('/',function(req,res){
+  res.render('login')
 });
+
+app.post('/auth', (req, res, next) => {
+console.log('Inside POST /login callback')
+auth.authenticate('local-login', (err, user, info) => {
+  if(info) {return res.send(info.message)}
+  if (err) { return next(err); }
+  if (!user) { return res.redirect('/login'); }
+  req.login(user, (err) => {
+    console.log(user);
+    if (err) { req.session.destroy();
+      return next(err); 
+    }
+    req.session.loggedin = true;
+    req.session.username = req.body.username;
+    return res.redirect('/home');
+})
+})(req, res, next);
+
+})
+
 
 //route for insert data
 app.post('/save',(req, res) => {
@@ -95,7 +109,7 @@ app.post('/delete',(req, res) => {
   });
 });
 app.get('/home',(req,res)=>{
-  res.render("home");
+  res.render("home",{username:req.session.username});
 })
 app.get('/users',(req,res)=>{
   res.render("users");
