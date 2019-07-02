@@ -47,21 +47,25 @@
 <body>
 
     <div class="wrapper">
-        {{>sidebar}}
+        {{>sidebar_admin}}
         <!-- Page Content  -->
         <div id="content">
             {{>nav}}
             <div class="container">
-                <canvas id="myChart" style="position:absolute; top:120px; left:60px"></canvas>
+                <canvas id="myChart" style="position:absolute; top:120px; left:200px"></canvas>
+                <h5 style="position:absolute; top:440px; left:170px">Accuracy Comparison of the 2 Algortihms Used</h5>
             </div>
             <div class="container1"style="position:absolute; top:600px; left:30px">
                 <canvas id="myChart1"></canvas>
+                <h5>Distribution of tags by KMeans</h5>
             </div>
             <div class="container2"style="position:absolute; top:600px; left:500px">
                 <canvas id="myChart2"></canvas>
+                <h5>Distribution of tags by SOM</h5>
             </div>
             <div class="container3"style="position:absolute; top:1000px; left:250px">
                 <canvas id="myChart3"></canvas>
+                <h5>Original Distribution</h5>
             </div>
         </div>
 
@@ -176,7 +180,7 @@
             }
         }
     });
-    var labels_pie_k = ["No. of 2s","No of 1s","No of 0s"];
+    var labels_pie_k = ["Hard","Medium","Easy"];
     var data_pie_k= [
         kmeans_2,kmeans_1,kmeans_0
     ];
@@ -189,12 +193,12 @@
                 {
                     data: data_pie_k,
                     backgroundColor: [ // Specify custom colors
-                        'rgba(54, 162, 235, 0.2)',
+                        'rgba(255, 99, 132, 0.2)',
                         'rgba(255, 206, 86, 0.2)',
                         'rgba(75, 192, 192, 0.2)'
                     ],
                     borderColor: [ // Add custom color borders
-                        'rgba(54, 162, 235, 1)',
+                        'rgba(255, 99, 132, 1)',
                         'rgba(255, 206, 86, 1)',
                         'rgba(75, 192, 192, 1)'
                     ],
@@ -209,7 +213,7 @@
             }
         }
     });
-    var labels_pie_s = ["No. of 2s","No of 1s","No of 0s"];
+    var labels_pie_s = ["Hard","Medium","Easy"];
     var data_pie_s= [
         som_2,som_1,som_0
     ];
@@ -222,12 +226,12 @@
                 {
                     data: data_pie_s,
                     backgroundColor: [ // Specify custom colors
-                        'rgba(54, 162, 235, 0.2)',
+                        'rgba(255, 99, 132, 0.2)',
                         'rgba(255, 206, 86, 0.2)',
                         'rgba(75, 192, 192, 0.2)'
                     ],
                     borderColor: [ // Add custom color borders
-                        'rgba(54, 162, 235, 1)',
+                        'rgba(255, 99, 132, 1)',
                         'rgba(255, 206, 86, 1)',
                         'rgba(75, 192, 192, 1)'
                     ],
@@ -242,7 +246,7 @@
             }
         }
     });
-    var labels_pie_o = ["No. of 2s","No of 1s","No of 0s"];
+    var labels_pie_o = ["Hard","Medium","Easy"];
     var data_pie_o= [
         orig_2,orig_1,orig_0
     ];
@@ -255,12 +259,12 @@
                 {
                     data: data_pie_o,
                     backgroundColor: [ // Specify custom colors
-                        'rgba(54, 162, 235, 0.2)',
+                        'rgba(255, 99, 132, 0.2)',
                         'rgba(255, 206, 86, 0.2)',
                         'rgba(75, 192, 192, 0.2)'
                     ],
                     borderColor: [ // Add custom color borders
-                        'rgba(54, 162, 235, 1)',
+                        'rgba(255, 99, 132, 1)',
                         'rgba(255, 206, 86, 1)',
                         'rgba(75, 192, 192, 1)'
                     ],

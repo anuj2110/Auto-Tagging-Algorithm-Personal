@@ -6,6 +6,7 @@ var mysql = require("mysql"); // for connecting to mysql database
 const auth = require("./service/passport");
 var path = require('path');
 const hbs = require('hbs');
+const flash  = require("connect-flash")
 //making the onnection to the databse
 var connection =  mysql.createConnection({
     host : "localhost",
@@ -43,6 +44,7 @@ app.use(bodyParser.json());
 
 app.use(auth.initialize());
 app.use(auth.session());
+app.use(flash())
 app.set('views',path.join(__dirname,'views'));
 //set view engi
 app.set('view engine', 'hbs');
@@ -58,7 +60,7 @@ app.post('/auth', (req, res, next) => {
   auth.authenticate('local-login', (err, user, info) => {
     if(info) {return res.send(info.message)}
     if (err) { return next(err); }
-    if (!user) { return res.redirect('/login'); }
+    if (!user) { return res.redirect('/sorry'); }
     req.login(user, (err) => {
       console.log(user);
       if (err) { req.session.destroy();

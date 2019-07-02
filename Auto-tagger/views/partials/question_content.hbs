@@ -1,0 +1,129 @@
+<div class="container">
+    <h2>User List</h2>
+		<button class="btn btn-success" data-toggle="modal" data-target="#myModalAdd">Add New</button>
+    <table class="table table-striped" id="mytable">
+      <thead>
+        <tr>
+          <th>Question ID</th>
+          <th>Category ID</th>
+          <th>answer_option1</th>
+          <th>difficulty_level</th>
+          <th>pre_tag</th>
+          <th>post_tag</th>
+        </tr>
+      </thead>
+      <tbody>
+         {{#each results}}
+        <tr>
+          <td>{{ id }}</td>
+          <td>{{ category_id }}</td>
+          <td>{{answer_option1}}</td>
+          <td>{{difficulty_level}}</td>
+          <td>{{pre_tag}}</td>
+          <td>{{post_tag}}</td>
+          <td>
+            <a href="javascript:void(0);" class="btn btn-sm btn-info edit" data-id="{{id}}" data-category_id="{{category_id}}" data-answer_option1 = "{{answer_option1}}" data-difficulty_level = "{{difficulty_level}}" data-pre_tag = "{{pre_tag}}" data-post_tag = "{{post_tag}}">Edit</a>
+            <a href="javascript:void(0);" class="btn btn-sm btn-danger delete" data-id="{{ id }}">Delete</a>
+          </td>
+        </tr>
+        {{/each}}
+      </tbody>
+    </table>
+  </div>
+
+	<!-- Add New Product Modal-->
+	  <form action="/save" method="post">
+        <div class="modal fade" id="myModalAdd" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+         <div class="modal-dialog" role="document">
+           <div class="modal-content">
+             <div class="modal-header">
+               <h5 class="modal-title" id="exampleModalLabel">Add New Product</h5>
+               <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                 <span aria-hidden="true">&times;</span>
+               </button>
+             </div>
+             <div class="modal-body">
+              <div class="form-group">
+                   <input type="text" name="category_id" class="form-control" placeholder="Category ID" required>
+               </div>
+               <div class="form-group">
+                   <input type="text" name="answer_option1" class="form-control" placeholder="Answer option" required>
+               </div>
+               <div class="form-group">
+                   <input type="text" name="difficulty_level" class="form-control" placeholder="Difficulty Level" required>
+               </div>
+               <div class="form-group">
+                   <input type="text" name="pre_tag" class="form-control" placeholder="Pre Tag" required>
+               </div>
+               <div class="form-group">
+                   <input type="text" name="post_tag" class="form-control" placeholder="Post Tag" required>
+               </div>
+             </div>
+             <div class="modal-footer">
+               <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+               <button type="submit" class="btn btn-primary">Save</button>
+             </div>
+           </div>
+         </div>
+        </div>
+	 </form>
+
+	 <!-- Edit Product Modal-->
+   <form action="/update" method="post">
+       <div class="modal fade" id="EditModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">Edit User</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <div class="form-group">
+                   <input type="text" name="category_id" class="form-control" placeholder="Category ID" required>
+               </div>
+               <div class="form-group">
+                   <input type="text" name="answer_option1" class="form-control" placeholder="Answer option" required>
+               </div>
+               <div class="form-group">
+                   <input type="text" name="difficulty_level" class="form-control" placeholder="Difficulty Level" required>
+               </div>
+               <div class="form-group">
+                   <input type="text" name="pre_tag" class="form-control" placeholder="Pre Tag" required>
+               </div>
+               <div class="form-group">
+                   <input type="text" name="post_tag" class="form-control" placeholder="Post Tag" required>
+               </div>
+            </div>
+            <div class="modal-footer">
+              <input type="hidden" name="id" class="question_id">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+              <button type="submit" class="btn btn-primary">Update</button>
+            </div>
+          </div>
+        </div>
+       </div>
+  </form>
+
+	 <!-- Delete Product Modal-->
+ 	  <form id="add-row-form" action="/delete" method="post">
+ 	     <div class="modal fade" id="DeleteModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+ 	        <div class="modal-dialog">
+ 	           <div class="modal-content">
+ 	               <div class="modal-header">
+					  <h5 class="modal-title" id="myModalLabel">Delete User</h5>
+ 	                  <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+ 	               </div>
+ 	               <div class="modal-body">
+												 <strong>Are You Sure To Delete This Data?</strong>
+ 	               </div>
+ 	               <div class="modal-footer">
+                      <input type="hidden" name="question_id" class="form-control question_id2" required>
+ 	                   	<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+ 	                  	<button type="submit" class="btn btn-success">Delete</button>
+ 	               </div>
+ 	      			</div>
+ 	        </div>
+ 	     </div>
+ 	 </form>

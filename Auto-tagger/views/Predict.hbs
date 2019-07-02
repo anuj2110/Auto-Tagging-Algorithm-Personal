@@ -29,7 +29,7 @@
 <body>
 
     <div class="wrapper">
-        {{>sidebar}}
+        {{>sidebar_admin}}
         <!-- Page Content  -->
         <div id="content">
             {{>nav}}
@@ -61,7 +61,7 @@
                     <button type="submit" class="btn btn-primary btn-block">Fetch Results</button>
 
                 </form>
-                {{#if (message)}}
+                {{#if message}}
                     <p style="color: red">{{message}}</p>
                 {{/if}}
             </div>

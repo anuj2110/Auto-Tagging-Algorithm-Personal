@@ -5,7 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
-    <title>Collapsible sidebar using Bootstrap 4</title>
+    <title>
+        Auto-Tagger
+    </title>
 
     <!-- Bootstrap CSS CDN -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
@@ -23,7 +25,7 @@
 <body>
 
     <div class="wrapper">
-        {{>sidebar}}
+        {{>sidebar_admin}}
         <!-- Page Content  -->
         <div id="content">
             {{>nav}}
@@ -53,19 +55,19 @@
     $(document).ready(function(){
 			//showing data to modal for edit record
       $('#mytable').on('click','.edit',function(){
-        var product_id = $(this).data('id');
-        var product_name = $(this).data('product_name');
-        var product_price = $(this).data('product_price');
+        var user_id = $(this).data('id');
+        var question_id = $(this).data('qid');
         $('#EditModal').modal('show');
-        $('.product_name').val(product_name);
-        $('.price').val(product_price);
-        $('.product_id').val(product_id);
+        $('.user_id').val(user_id);
+        $('.question_id').val(question_id);
       });
 			//showing modal for delete record
 			$('#mytable').on('click','.delete',function(){
-        var product_id = $(this).data('id');
+        var user_id = $(this).data('uid');
+        var question_id = $(this).data('qid');
         $('#DeleteModal').modal('show');
-        $('.product_id2').val(product_id);
+        $('.user_id2').val(user_id);
+        $('.question_id2').val(question_id);
       });
 
     });

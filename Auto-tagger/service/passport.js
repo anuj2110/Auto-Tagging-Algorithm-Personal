@@ -2,6 +2,7 @@ const passport = require("passport");
 const bcrypt = require('bcrypt-nodejs');
 const mysql = require("mysql"); 
 const LocalStrategy = require("passport-local").Strategy
+const flash  = require("connect-flash")
 var connection =  mysql.createConnection({
     host : "localhost",
     user : "anuj",

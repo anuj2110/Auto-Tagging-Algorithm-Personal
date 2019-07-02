@@ -35,7 +35,7 @@ sequelize
   .authenticate()
   .then(() => {
    
-  sequelize.query("select * from stats_2018").then(([results, metadata]) => {
+sequelize.query("select * from stats_2018").then(([results, metadata]) => {
       // Results will be an empty array and metadata will contain the number of affected rows.
       let array=[]
       array.push(JSON.parse(JSON.stringify(results)),JSON.parse(JSON.stringify(metadata)));;
