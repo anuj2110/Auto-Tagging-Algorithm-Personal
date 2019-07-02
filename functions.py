@@ -1,6 +1,7 @@
 from sklearn.preprocessing import MinMaxScaler
 import pandas as pd
 import numpy as np
+from sqlalchemy import text
 def f1(weights_map,marked,sum_weight):
     feature_f1=[]
     sum_ =0
@@ -36,24 +37,27 @@ def f2(weights_map,marks_map,marked,sum_weight):
             feature_f2.append(sum_/float(sum_weight))
     return feature_f2
 def weighted_features(conn):
-    query1= '''select marks_scored from test_start_details'''
-    for_weights = pd.read_sql_query(query1,conn)
+    query1= "select marks_scored from test_start_details"
+    a = conn.execute(text(query1))
+    for_weights = pd.DataFrame(a,columns = a.keys())
     weights_p=[]
     for i in for_weights["marks_scored"]:
         weights_p.append(float(i))
     marks = np.array(weights_p)
     mms = MinMaxScaler(feature_range = (0,2))
     weights = list(mms.fit_transform(marks.reshape((-1,1))))
-    query2 = '''select t1.id,t2.question_id,t2.marks,t2.marked from test_start_details t1,test_ques_ans_dtls t2 where t1.id = t2.test_id;'''
-    cal_for_f1 = pd.read_sql_query(query2,conn)
+    query2 = "select t1.id,t2.question_id,t2.marks,t2.marked from test_start_details t1,test_ques_ans_dtls t2 where t1.id = t2.test_id;"
+    b = conn.execute(text(query2))
+    cal_for_f1 = pd.DataFrame(b,b.keys())
     sum_weight = np.sum(weights)
     ques_ids = [i for i in range(1,1801)]
     marked = {i:[] for i in ques_ids}
     for i,val in enumerate(cal_for_f1["question_id"]):
         marked[val].append((cal_for_f1["id"].iloc[i],cal_for_f1["marks"].iloc[i]))
     print(len(marked))
-    query3= '''select id from test_start_details'''
-    mem_id = pd.read_sql_query(query3,conn)
+    query3= "select id from test_start_details"
+    c = conn.execute(text(query3))
+    mem_id = pd.DataFrame(c,c.keys())
     mem_id_l = []
     for i in mem_id["id"]:
         mem_id_l.append(i)

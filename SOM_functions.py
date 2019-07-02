@@ -1,9 +1,6 @@
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
-from sklearn.preprocessing import StandardScaler,MinMaxScaler
-from accuracy_calc import *
-import sqlalchemy
 
 def get_weights(total_data):
     '''
