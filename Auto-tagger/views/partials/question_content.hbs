@@ -1,6 +1,5 @@
 <div class="container">
-    <h2>User List</h2>
-		<button class="btn btn-success" data-toggle="modal" data-target="#myModalAdd">Add New</button>
+    <h2>Question List</h2>
     <table class="table table-striped" id="mytable">
       <thead>
         <tr>
@@ -32,7 +31,7 @@
   </div>
 
 	<!-- Add New Product Modal-->
-	  <form action="/save" method="post">
+	  <form action="/qsave" method="post">
         <div class="modal fade" id="myModalAdd" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
          <div class="modal-dialog" role="document">
            <div class="modal-content">
@@ -69,7 +68,7 @@
 	 </form>
 
 	 <!-- Edit Product Modal-->
-   <form action="/update" method="post">
+   <form action="/qupdate" method="post">
        <div class="modal fade" id="EditModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
           <div class="modal-content">
@@ -97,7 +96,7 @@
                </div>
             </div>
             <div class="modal-footer">
-              <input type="hidden" name="id" class="question_id">
+              <input type="hidden" name="id" class="id">
               <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
               <button type="submit" class="btn btn-primary">Update</button>
             </div>
@@ -107,12 +106,12 @@
   </form>
 
 	 <!-- Delete Product Modal-->
- 	  <form id="add-row-form" action="/delete" method="post">
+ 	  <form id="add-row-form" action="/qdelete" method="post">
  	     <div class="modal fade" id="DeleteModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
  	        <div class="modal-dialog">
  	           <div class="modal-content">
  	               <div class="modal-header">
-					  <h5 class="modal-title" id="myModalLabel">Delete User</h5>
+					  <h5 class="modal-title" id="myModalLabel">Delete Question</h5>
  	                  <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
  	               </div>
  	               <div class="modal-body">
