@@ -24,23 +24,56 @@
         integrity="sha384-6OIrr52G08NpOFSZdxxz1xdNSndlD4vdcf/q2myIUVO0VsqaGHJsB0RaBE01VTOY"
         crossorigin="anonymous"></script>
     <style>
-            .container {
-                width: 50%;
-                height: 0.1%;
-            }
-            .container1 {
-                width: 50%;
-                height: 30%;
-            }
-            .container2 {
-                width: 50%;
-                height: 30%;
-            }
-            .container3 {
-                width: 50%;
-                height: 30%;
-            }
-        </style>
+        .container {
+            width: 50%;
+            height: 0.1%;
+        }
+
+        .container1 {
+            width: 50%;
+            height: 3%;
+        }
+
+        .container2 {
+            width: 50%;
+            height: 25%;
+        }
+
+        .container3 {
+            width: 50%;
+            height: 25%;
+        }
+
+        .container4 {
+            width: 100%;
+            height: 20%;
+        }
+
+        .container5 {
+            width: 100%;
+            height: 20%;
+        }
+
+        .container6 {
+            width: 100%;
+            height: 20%;
+        }
+
+        .container7 {
+            width: 100%;
+            height: 20%;
+        }
+
+        .container8 {
+            width: 100%;
+            height: 20;
+        }
+
+        .container9 {
+            width: 100%;
+            height: 20%;
+        }
+    </style>
 
 </head>
 
@@ -55,18 +88,44 @@
                 <canvas id="myChart" style="position:absolute; top:120px; left:200px"></canvas>
                 <h5 style="position:absolute; top:440px; left:170px">Accuracy Comparison of the 2 Algortihms Used</h5>
             </div>
-            <div class="container1"style="position:absolute; top:600px; left:30px">
+            <div class="container1" style="position:absolute; top:600px; left:30px">
                 <canvas id="myChart1"></canvas>
                 <h5>Distribution of tags by KMeans</h5>
             </div>
-            <div class="container2"style="position:absolute; top:600px; left:500px">
+            <div class="container2" style="position:absolute; top:600px; left:500px">
                 <canvas id="myChart2"></canvas>
                 <h5>Distribution of tags by SOM</h5>
             </div>
-            <div class="container3"style="position:absolute; top:1000px; left:250px">
+            <div class="container3" style="position:absolute; top:1000px; left:250px">
                 <canvas id="myChart3"></canvas>
                 <h5>Original Distribution</h5>
             </div>
+            <div class="container4" style="position:absolute; top:1400px; left:30px">
+                <canvas id="myChart4"></canvas>
+                <h5>Easy to Hard</h5>
+            </div>
+            <div class="container5" style="position:absolute; top:2100px; left:30px">
+                <canvas id="myChart5"></canvas>
+                <h5>Hard to Easy</h5>
+            </div>
+
+            <div class="container6" style="position:absolute; top:2800px; left:30px">
+                <canvas id="myChart6"></canvas>
+                <h5>Easy to Medium</h5>
+            </div>
+            <div class="container7" style="position:absolute; top:3500px; left:30px">
+                <canvas id="myChart7"></canvas>
+                <h5>Medium to Easy</h5>
+            </div> 
+
+            <div class="container8" style="position:absolute; top:4200px; left:30px">
+                <canvas id="myChart8"></canvas>
+                <h5>Medium to Hard</h5>
+            </div>
+            <div class="container9" style="position:absolute; top:4900px; left:30px">
+                <canvas id="myChart9"></canvas>
+                <h5>Hard to Medium</h5>
+            </div>   
         </div>
 
     </div>
@@ -86,93 +145,219 @@
 
     $(document).ready(function () {
         var data = {{{ data }}};
-        console.log("ready!");
-        console.log(data[0].KMeans_labels)
-        console.log(data.length)
-        var kmeans_labels = [];
-        var som_labels = [];
-        var original_labels = [];
-        for (var i = 0; i <data.length ; ++i) {
-            kmeans_labels = kmeans_labels.concat(data[i].KMeans_labels);
-            som_labels = som_labels.concat(data[i].SOM_labels);
-            original_labels = original_labels.concat(data[i].original);
-        }
-        console.log(kmeans_labels);
-        console.log(som_labels);    
-        var kmeans_acc = 0, som_acc = 0;
-        var kmeans_2 = 0, kmeans_1 = 0, kmeans_0 = 0;
-        var som_2 = 0, som_1 = 0, som_0 = 0;
-        var orig_2 = 0,orig_1 = 0,orig_0 = 0;
-        for (var i = 0; i < data.length; ++i) {
-            if(kmeans_labels[i]==2){
-                kmeans_2 = kmeans_2+1;
-            }else if(kmeans_labels[i]==1){
-                kmeans_1 = kmeans_1+1;
-            }else if(kmeans_labels[i]==0){
-                kmeans_0 = kmeans_0+1;
-            }
-            if(som_labels[i]==2){
-                som_2 = som_2+1;
-            }else if(som_labels[i]==1){
-                som_1 = som_1+1;
-            }else if(som_labels[i]==0){
-                som_0 = som_0+1;
-            }
-            if(original_labels[i]==2){
-                orig_2 = orig_2+1;
-            }else if(original_labels[i]==1){
-                orig_1 = orig_1+1;
-            }else if(original_labels[i]==0){
-                orig_0 = orig_0+1;
-            }
-        }
-        count = 0;
-        for (var i = 0; i < data.length; ++i){
-            if(kmeans_labels[i]==original_labels[i]){
-                count = count+1;
-            }
-        }
-        kmeans_acc = count/data.length;
-        count = 0;
-        for (var i = 0; i < data.length; ++i){
-            if(som_labels[i]==original_labels[i]){
-                count = count+1;
-            }
-        }
-        som_acc = count/data.length;
-        console.log(kmeans_acc);
-        console.log(som_acc);
-        var ctx = document.getElementById("myChart").getContext('2d');
-        // Define the data 
-        var data = [kmeans_acc,som_acc]; // Add data values to array
+    console.log("ready!");
+    console.log(data[0].KMeans_labels)
+    console.log(data.length)
+    var stats = {{{ stats }}}
+    console.log(stats)
+    var kmeans_labels = [];
+    var som_labels = [];
+    var original_labels = [];
 
-        var labels = ["Accuracy_KMeans","Accuracy_SOM"]; // Add labels to array
-        var myChart = new Chart(ctx, {
-            type: 'horizontalBar',
-            data: {
-                labels: labels,
-                datasets: [{
-                    data: data, // Specify the data values array
-                    backgroundColor: [ // Specify custom colors
-                        'rgba(255, 99, 132, 0.2)',
-                        'rgba(54, 162, 235, 0.2)',
-                    ],
-                    borderColor: [ // Add custom color borders
-                        'rgba(255,99,132,1)',
-                        'rgba(54, 162, 235, 1)',
-                    ],
-                    borderWidth: 1 // Specify bar border width
-                }]
-            },
-            options: {
-                responsive: true, // Instruct chart js to respond nicely.
-                maintainAspectRatio: true,
-                scales: {
+    var zero_as_two = [];
+    var two_as_zero = [];
+
+    var zero_as_one = [];
+    var one_as_zero = [];
+
+    var one_as_two = [];
+    var two_as_one = [];
+
+    for (var i = 0; i < data.length; ++i) {
+        kmeans_labels = kmeans_labels.concat(data[i].KMeans_labels);
+        som_labels = som_labels.concat(data[i].SOM_labels);
+        original_labels = original_labels.concat(data[i].original);
+    }
+    console.log(kmeans_labels);
+    console.log(som_labels);
+    var kmeans_acc = 0, som_acc = 0;
+    var kmeans_2 = 0, kmeans_1 = 0, kmeans_0 = 0;
+    var som_2 = 0, som_1 = 0, som_0 = 0;
+    var orig_2 = 0, orig_1 = 0, orig_0 = 0;
+    for (var i = 0; i < data.length; ++i) {
+        if (kmeans_labels[i] == 2) {
+            kmeans_2 = kmeans_2 + 1;
+        } else if (kmeans_labels[i] == 1) {
+            kmeans_1 = kmeans_1 + 1;
+        } else if (kmeans_labels[i] == 0) {
+            kmeans_0 = kmeans_0 + 1;
+        }
+        if (som_labels[i] == 2) {
+            som_2 = som_2 + 1;
+        } else if (som_labels[i] == 1) {
+            som_1 = som_1 + 1;
+        } else if (som_labels[i] == 0) {
+            som_0 = som_0 + 1;
+        }
+        if (original_labels[i] == 2) {
+            orig_2 = orig_2 + 1;
+        } else if (original_labels[i] == 1) {
+            orig_1 = orig_1 + 1;
+        } else if (original_labels[i] == 0) {
+            orig_0 = orig_0 + 1;
+        }
+    }
+    count = 0;
+    for (var i = 0; i < data.length; ++i) {
+        if (kmeans_labels[i] == original_labels[i]) {
+            count = count + 1;
+        }
+    }
+    kmeans_acc = count / data.length;
+    count = 0;
+    for (var i = 0; i < data.length; ++i) {
+        if (som_labels[i] == original_labels[i]) {
+            count = count + 1;
+        }
+    }
+    som_acc = count / data.length;
+    console.log(kmeans_acc);
+    console.log(som_acc);
+
+    for (var i = 0; i < stats.length; ++i) {
+        if (kmeans_acc > som_acc) {
+            if (kmeans_labels[i] == 2 && original_labels[i] == 0) {
+                zero_as_two.push(i + 1)
+            }
+            else if (kmeans_labels[i] == 0 && original_labels[i] == 2) {
+                two_as_zero.push(i + 1)
+            }
+        }
+        else if (som_acc > kmeans_acc) {
+            if (kmeans_labels[i] == 2 && original_labels[i] == 0) {
+                zero_as_two.push(i + 1)
+            }
+            else if (kmeans_labels[i] == 0 && original_labels[i] == 2) {
+                two_as_zero.push(i + 1)
+            }
+        }
+
+    }
+    var corr_ans = { z_a_2: [], _2_a_z: [], o_a_2: [], _2_a_o: [], z_a_1: [], _1_a_z: [] };
+    var incorr_ans = { z_a_2: [], _2_a_z: [], o_a_2: [], _2_a_o: [], z_a_1: [], _1_a_z: [] };
+    var not_ans = { z_a_2: [], _2_a_z: [], o_a_2: [], _2_a_o: [], z_a_1: [], _1_a_z: [] };
+
+    for (var i = 0; i < zero_as_two.length; ++i) {
+        var cor = stats[zero_as_two[i] - 1].correctly_answered;
+        var incor = stats[zero_as_two[i] - 1].incorrectly_answered;
+        var na = stats[zero_as_two[i] - 1].not_answered;
+        corr_ans.z_a_2.push(cor);
+        incorr_ans.z_a_2.push(incor);
+        not_ans.z_a_2.push(na);
+    }
+    for (var i = 0; i < two_as_zero.length; ++i) {
+        var cor = stats[two_as_zero[i] - 1].correctly_answered;
+        var incor = stats[two_as_zero[i] - 1].incorrectly_answered;
+        var na = stats[two_as_zero[i] - 1].not_answered;
+        corr_ans._2_a_z.push(cor);
+        incorr_ans._2_a_z.push(incor);
+        not_ans._2_a_z.push(na);
+    }
+
+    for (var i = 0; i < stats.length; ++i) {
+        if (kmeans_acc > som_acc) {
+            if (kmeans_labels[i] == 1 && original_labels[i] == 0) {
+                zero_as_one.push(i + 1)
+            }
+            else if (kmeans_labels[i] == 0 && original_labels[i] == 1) {
+                one_as_zero.push(i + 1)
+            }
+        }
+        else if (som_acc > kmeans_acc) {
+            if (kmeans_labels[i] == 1 && original_labels[i] == 0) {
+                zero_as_one.push(i + 1)
+            }
+            else if (kmeans_labels[i] == 0 && original_labels[i] == 1) {
+                one_as_zero.push(i + 1)
+            }
+        }
+
+    }
+    for (var i = 0; i < zero_as_one.length; ++i) {
+        var cor = stats[zero_as_one[i] - 1].correctly_answered;
+        var incor = stats[zero_as_one[i] - 1].incorrectly_answered;
+        var na = stats[zero_as_one[i] - 1].not_answered;
+        corr_ans.z_a_1.push(cor);
+        incorr_ans.z_a_1.push(incor);
+        not_ans.z_a_1.push(na);
+    }
+    for (var i = 0; i < one_as_zero.length; ++i) {
+        var cor = stats[one_as_zero[i] - 1].correctly_answered;
+        var incor = stats[one_as_zero[i] - 1].incorrectly_answered;
+        var na = stats[one_as_zero[i] - 1].not_answered;
+        corr_ans._1_a_z.push(cor);
+        incorr_ans._1_a_z.push(incor);
+        not_ans._1_a_z.push(na);
+    }
+
+    for (var i = 0; i < stats.length; ++i) {
+        if (kmeans_acc > som_acc) {
+            if (kmeans_labels[i] == 2 && original_labels[i] == 1) {
+                one_as_two.push(i + 1)
+            }
+            else if (kmeans_labels[i] == 1 && original_labels[i] == 2) {
+                two_as_one.push(i + 1)
+            }
+        }
+        else if (som_acc > kmeans_acc) {
+            if (kmeans_labels[i] == 2 && original_labels[i] == 1) {
+                one_as_two.push(i + 1)
+            }
+            else if (kmeans_labels[i] == 1 && original_labels[i] == 2) {
+                two_as_one.push(i + 1)
+            }
+        }
+
+    }
+
+    for (var i = 0; i < one_as_two.length; ++i) {
+        var cor = stats[one_as_two[i] - 1].correctly_answered;
+        var incor = stats[one_as_two[i] - 1].incorrectly_answered;
+        var na = stats[one_as_two[i] - 1].not_answered;
+        corr_ans.o_a_2.push(cor);
+        incorr_ans.o_a_2.push(incor);
+        not_ans.o_a_2.push(na);
+    }
+    for (var i = 0; i < two_as_one.length; ++i) {
+        var cor = stats[two_as_one[i] - 1].correctly_answered;
+        var incor = stats[two_as_one[i] - 1].incorrectly_answered;
+        var na = stats[two_as_one[i] - 1].not_answered;
+        corr_ans._2_a_o.push(cor);
+        incorr_ans._2_a_o.push(incor);
+        not_ans._2_a_o.push(na);
+    }
+
+    var ctx = document.getElementById("myChart").getContext('2d');
+    // Define the data 
+    var data = [kmeans_acc, som_acc]; // Add data values to array
+
+    var labels = ["Accuracy_KMeans", "Accuracy_SOM"]; // Add labels to array
+    var myChart = new Chart(ctx, {
+        type: 'horizontalBar',
+        data: {
+            labels: labels,
+            datasets: [{
+                data: data, // Specify the data values array
+                backgroundColor: [ // Specify custom colors
+                    'rgba(255, 99, 132, 0.2)',
+                    'rgba(54, 162, 235, 0.2)',
+                ],
+                borderColor: [ // Add custom color borders
+                    'rgba(255,99,132,1)',
+                    'rgba(54, 162, 235, 1)',
+                ],
+                borderWidth: 1 // Specify bar border width
+            }]
+        },
+        options: {
+            responsive: true, // Instruct chart js to respond nicely.
+            maintainAspectRatio: true,
+            scales: {
                 xAxes: [{
                     ticks: {
                         beginAtZero: true
                     }
-                }]                
+                }]
             },
             title: {
                 display: true,
@@ -180,9 +365,9 @@
             }
         }
     });
-    var labels_pie_k = ["Hard","Medium","Easy"];
-    var data_pie_k= [
-        kmeans_2,kmeans_1,kmeans_0
+    var labels_pie_k = ["Hard", "Medium", "Easy"];
+    var data_pie_k = [
+        kmeans_2, kmeans_1, kmeans_0
     ];
     var pie = document.getElementById("myChart1").getContext('2d');
     var myChart = new Chart(pie, {
@@ -202,7 +387,7 @@
                         'rgba(255, 206, 86, 1)',
                         'rgba(75, 192, 192, 1)'
                     ],
-                    borderWidth: 1 
+                    borderWidth: 1
                 }
             ]
         },
@@ -213,9 +398,9 @@
             }
         }
     });
-    var labels_pie_s = ["Hard","Medium","Easy"];
-    var data_pie_s= [
-        som_2,som_1,som_0
+    var labels_pie_s = ["Hard", "Medium", "Easy"];
+    var data_pie_s = [
+        som_2, som_1, som_0
     ];
     var pie = document.getElementById("myChart2").getContext('2d');
     var myChart = new Chart(pie, {
@@ -235,7 +420,7 @@
                         'rgba(255, 206, 86, 1)',
                         'rgba(75, 192, 192, 1)'
                     ],
-                    borderWidth: 1 
+                    borderWidth: 1
                 }
             ]
         },
@@ -246,9 +431,9 @@
             }
         }
     });
-    var labels_pie_o = ["Hard","Medium","Easy"];
-    var data_pie_o= [
-        orig_2,orig_1,orig_0
+    var labels_pie_o = ["Hard", "Medium", "Easy"];
+    var data_pie_o = [
+        orig_2, orig_1, orig_0
     ];
     var pie = document.getElementById("myChart3").getContext('2d');
     var myChart = new Chart(pie, {
@@ -268,7 +453,7 @@
                         'rgba(255, 206, 86, 1)',
                         'rgba(75, 192, 192, 1)'
                     ],
-                    borderWidth: 1 
+                    borderWidth: 1
                 }
             ]
         },
@@ -279,6 +464,290 @@
             }
         }
     });
+    var ctx = document.getElementById("myChart4").getContext("2d");
+
+    var data = {
+        labels: zero_as_two,
+        datasets: [
+            {
+                label: 'Correctly_answered',
+                backgroundColor: 'rgba(75, 192, 192, 0.8)',
+                data: corr_ans.z_a_2
+            },
+
+            {
+                label: 'Inorrectly_answered',
+                backgroundColor: 'rgba(255, 99, 132, 0.8)',
+                data: not_ans.z_a_2
+            },
+            {
+                label: 'Not_answered',
+                backgroundColor: 'rgba(255, 206, 86, 0.8)',
+                data: incorr_ans.z_a_2
+            }
+        ]
+    };
+
+    var myBarChart1 = new Chart(ctx, {
+        type: 'bar',
+        data: data,
+        options: {
+            barValueSpacing: 10,
+            scales: {
+                yAxes: [{
+                    ticks: {
+                        min: 0,
+                    }
+                }],
+                xAxes: [{
+                    barPercentage: 0.3,
+                    barThickness: 4,
+                    maxBarThickness: 4,
+                    minBarLength: 2,
+                    gridLines: {
+                        offsetGridLines: true
+                    }
+                }]
+            }
+        }
+    });
+    var ctx = document.getElementById("myChart5").getContext("2d");
+
+    var data = {
+        labels: two_as_zero,
+        datasets: [
+            {
+                label: 'Correctly_answered',
+                backgroundColor: 'rgba(75, 192, 192, 0.8)',
+                data: corr_ans._2_a_z
+            },
+
+            {
+                label: 'Inorrectly_answered',
+                backgroundColor: 'rgba(255, 99, 132, 0.8)',
+                data: not_ans._2_a_z
+            },
+            {
+                label: 'Not_answered',
+                backgroundColor: 'rgba(255, 206, 86, 0.8)',
+                data: incorr_ans._2_a_z
+            }
+        ]
+    };
+
+    var myBarChart2 = new Chart(ctx, {
+        type: 'bar',
+        data: data,
+        options: {
+            barValueSpacing: 5,
+            scales: {
+                yAxes: [{
+                    ticks: {
+                        min: 0,
+                    }
+                }],
+                xAxes: [{
+                    barPercentage: 0.5,
+                    barThickness: 6,
+                    maxBarThickness: 4,
+                    minBarLength: 2,
+                    gridLines: {
+                        offsetGridLines: true
+                    }
+                }]
+            }
+        }
+    });
+    var ctx = document.getElementById("myChart6").getContext("2d");
+
+    var data = {
+        labels: zero_as_one.slice(0,50),
+        datasets: [
+            {
+                label: 'Correctly_answered',
+                backgroundColor: 'rgba(75, 192, 192, 0.8)',
+                data: corr_ans.z_a_1.slice(0,50)
+            },
+
+            {
+                label: 'Inorrectly_answered',
+                backgroundColor: 'rgba(255, 99, 132, 0.8)',
+                data: not_ans.z_a_1.slice(0,50)
+            },
+            {
+                label: 'Not_answered',
+                backgroundColor: 'rgba(255, 206, 86, 0.8)',
+                data: incorr_ans.z_a_1.slice(0,50)
+            }
+        ]
+    };
+
+    var myBarChart3 = new Chart(ctx, {
+        type: 'bar',
+        data: data,
+        options: {
+            barValueSpacing: 15,
+            scales: {
+                yAxes: [{
+                    ticks: {
+                        min: 0,
+                    }
+                }],
+                xAxes: [{
+                    barPercentage: 0.3,
+                    barThickness: 6,
+                    maxBarThickness: 8,
+                    minBarLength: 2,
+                    gridLines: {
+                        offsetGridLines: true
+                    }
+                }]
+            }
+        }
+    });
+    var ctx = document.getElementById("myChart7").getContext("2d");
+
+    var data = {
+        labels: one_as_zero.slice(0,50),
+        datasets: [
+            {
+                label: 'Correctly_answered',
+                backgroundColor: 'rgba(75, 192, 192, 0.8)',
+                data: corr_ans._1_a_z.slice(0,50)
+            },
+
+            {
+                label: 'Inorrectly_answered',
+                backgroundColor: 'rgba(255, 99, 132, 0.8)',
+                data: not_ans._1_a_z.slice(0,50)
+            },
+            {
+                label: 'Not_answered',
+                backgroundColor: 'rgba(255, 206, 86, 0.8)',
+                data: incorr_ans._1_a_z.slice(0,50)
+            }
+        ]
+    };
+
+    var myBarChart4 = new Chart(ctx, {
+        type: 'bar',
+        data: data,
+        options: {
+            barValueSpacing: 15,
+            scales: {
+                yAxes: [{
+                    ticks: {
+                        min: 0,
+                    }
+                }],
+                xAxes: [{
+                    barPercentage: 0.3,
+                    barThickness: 6,
+                    maxBarThickness: 8,
+                    minBarLength: 2,
+                    gridLines: {
+                        offsetGridLines: true
+                    }
+                }]
+            }
+        }
+    });
+
+    var ctx = document.getElementById("myChart8").getContext("2d");
+
+    var data = {
+        labels: one_as_two.slice(0,50),
+        datasets: [
+            {
+                label: 'Correctly_answered',
+                backgroundColor: 'rgba(75, 192, 192, 0.8)',
+                data: corr_ans.o_a_2.slice(0,50)
+            },
+
+            {
+                label: 'Inorrectly_answered',
+                backgroundColor: 'rgba(255, 99, 132, 0.8)',
+                data: not_ans.o_a_2.slice(0,50)
+            },
+            {
+                label: 'Not_answered',
+                backgroundColor: 'rgba(255, 206, 86, 0.8)',
+                data: incorr_ans.o_a_2.slice(0,50)
+            }
+        ]
+    };
+
+    var myBarChart5 = new Chart(ctx, {
+        type: 'bar',
+        data: data,
+        options: {
+            barValueSpacing: 15,
+            scales: {
+                yAxes: [{
+                    ticks: {
+                        min: 0,
+                    }
+                }],
+                xAxes: [{
+                    barPercentage: 0.3,
+                    barThickness: 6,
+                    maxBarThickness: 8,
+                    minBarLength: 2,
+                    gridLines: {
+                        offsetGridLines: true
+                    }
+                }]
+            }
+        }
+    });
+    var ctx = document.getElementById("myChart9").getContext("2d");
+
+    var data = {
+        labels: two_as_one.slice(0,50),
+        datasets: [
+            {
+                label: 'Correctly_answered',
+                backgroundColor: 'rgba(75, 192, 192, 0.8)',
+                data: corr_ans._2_a_o.slice(0,50)
+            },
+
+            {
+                label: 'Inorrectly_answered',
+                backgroundColor: 'rgba(255, 99, 132, 0.8)',
+                data: not_ans._2_a_o.slice(0,50)
+            },
+            {
+                label: 'Not_answered',
+                backgroundColor: 'rgba(255, 206, 86, 0.8)',
+                data: incorr_ans._2_a_o.slice(0,50)
+            }
+        ]
+    };
+
+    var myBarChart6 = new Chart(ctx, {
+        type: 'bar',
+        data: data,
+        options: {
+            barValueSpacing: 15,
+            scales: {
+                yAxes: [{
+                    ticks: {
+                        min: 0,
+                    }
+                }],
+                xAxes: [{
+                    barPercentage: 0.3,
+                    barThickness: 6,
+                    maxBarThickness: 8,
+                    minBarLength: 2,
+                    gridLines: {
+                        offsetGridLines: true
+                    }
+                }]
+            }
+        }
+    });
+
 });
 </script>
 

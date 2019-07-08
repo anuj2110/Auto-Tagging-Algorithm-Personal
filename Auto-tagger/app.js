@@ -9,12 +9,12 @@ const hbs = require('hbs');
 const bodyParser = require('body-parser');
 //used for distinction of different users
 const session = require('express-session');
-//used for calling flask API
-const axios =  require('axios');
 //authentication middleware
 const auth = require("./service/passport");
 const flash = require("connect-flash");
-const routes = require('./routes/router')
+const auth_routes = require('./routes/router')
+const admin_routes = require("./routes/admin.routes")
+const user_routes = require("./controllers/user.controller")
 //instantiating the app
 const app = express();
 
@@ -39,7 +39,9 @@ app.use(session({
 app.use(auth.initialize());
 app.use(auth.session());
 app.use(flash())
-app.use(routes)
+app.use(auth_routes)
+app.use(admin_routes)
+app.use(user_routes)
 app.listen(8000, () => {
   console.log('Server is running at port 8000');
 });
