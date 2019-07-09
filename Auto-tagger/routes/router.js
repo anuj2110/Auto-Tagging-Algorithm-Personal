@@ -1,15 +1,22 @@
 const express = require('express');
-const user_admin = require("../service/user-admin-middleware")
 const auth_controller = require("../controllers/auth.controller")
-const router = express.Router();
-router.get('/login',function(req,res){
+module.exports = (user_admin)=>{
+  const router = express.Router();
+  router.get('/login',function(req,res){
     res.render('login')
   });
 router.post('/auth',auth_controller.login)
 router.get('/sorry',(req,res)=>{
-    res.render('sorry');
+    res.redirect('/login');
   })
-router.get('/',user_admin,(req,res)=>{});
+router.get('/',function(req,res){
+  if (req.session.loggedin) {
+      if(req.session.user.role=='admin'){console.log("Inside admin");return res.redirect('/admin')}
+      else{console.log("Inside user");return res.redirect('/user')}
+      } else {
+          res.redirect('/login');
+      }
+});
 router.get('/logout', function(req, res, next) {
     if (req.session) {
       // delete session object
@@ -22,5 +29,5 @@ router.get('/logout', function(req, res, next) {
       });
     }
   });
-  
-module.exports = router
+  return router;
+}

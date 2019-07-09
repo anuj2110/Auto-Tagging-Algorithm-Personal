@@ -27,6 +27,7 @@ const conn2 = mysql.createConnection({
 })
 let question_master = questions(sequelize2,Sequelize)
 module.exports = {
+    home: (req,res)=>{res.render(".user/home_user")},
     questions:(req, res) => {
         let sql = `select question_id from user_question where user_id = ${req.session.user.userid}`;
             let query = sequelize3.query(sql).then((results0)=>{

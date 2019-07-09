@@ -26,6 +26,7 @@ const sequelize2 = new Sequelize('auto_tagging_data', 'anuj', 'Anuj@21101998', {
     }
 });
 module.exports = {
+    home: (req,res)=>{res.render("./admin/home")},
     users: (req, res) => {
         let sql = "SELECT * FROM user_question";
         let query = conn.query(sql, (err, results) => {
