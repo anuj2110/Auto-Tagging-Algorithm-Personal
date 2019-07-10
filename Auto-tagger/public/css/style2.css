@@ -95,6 +95,30 @@ a[aria-expanded="true"] {
     background: #6d7fcc;
 }
 
+#sidebar ul li.active1>a,
+a[aria-expanded="true"] {
+    color: #fff;
+    background: #6d7fcc;
+}
+
+#sidebar ul li.active2>a,
+a[aria-expanded="true"] {
+    color: #fff;
+    background: #6d7fcc;
+}
+
+#sidebar ul li.active3>a,
+a[aria-expanded="true"] {
+    color: #fff;
+    background: #6d7fcc;
+}
+
+#sidebar ul li.active4>a,
+a[aria-expanded="true"] {
+    color: #fff;
+    background: #6d7fcc;
+}
+
 a[data-toggle="collapse"] {
     position: relative;
 }

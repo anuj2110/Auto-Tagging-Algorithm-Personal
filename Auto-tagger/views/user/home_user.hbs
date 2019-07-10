@@ -21,12 +21,23 @@
 
 <body>
 
-    <div class="wrapper">
+     <div class="wrapper">
         {{>sidebar_user}}
         <!-- Page Content  -->
         <div id="content">
             {{>nav}}
-            <h1>WELCOME {{username}}</h1>
+            <h1 style="padding: 30px">WELCOME</h1>
+            <div class="row">
+                <div class="col-sm-6" style="left: 30%">
+                    <div class="card">
+                        <div class="card-body" style=" background-color:#7386D5;">
+                            <h5 class="card-title" style="color: white">Questions</h5>
+                            <p style="color: white">Shows Question IDs assigned to you</p>
+                            <a href="/user/uquestions" class="btn btn-dark">Questions</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 
