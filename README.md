@@ -32,6 +32,6 @@
 - The above two commands should start a server for python and node respectively.
 - Open the browser and browse http://localhost:8000 to see the web app
 
-###follow the demo below
+### follow the demo below
 
 - [![](http://img.youtube.com/vi/pJj7sUYC_CE/0.jpg)](http://www.youtube.com/watch?v=pJj7sUYC_CE "")
