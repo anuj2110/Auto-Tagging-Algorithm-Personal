@@ -33,4 +33,5 @@
 - Open the browser and browse http://localhost:8000 to see the web app
 
 ###follow the demo below
-[![](http://img.youtube.com/vi/pJj7sUYC_CE/0.jpg)](http://www.youtube.com/watch?v=pJj7sUYC_CE "")
+
+- [![](http://img.youtube.com/vi/pJj7sUYC_CE/0.jpg)](http://www.youtube.com/watch?v=pJj7sUYC_CE "")
