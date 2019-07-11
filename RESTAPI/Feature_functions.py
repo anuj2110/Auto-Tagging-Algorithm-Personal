@@ -1,7 +1,7 @@
-
 import pandas as pd
 import numpy as np
 from sqlalchemy import text
+from sklearn.preprocessing import MinMaxScaler
 def f1(weights_map,marked,sum_weight):
     feature_f1=[]
     sum_ =0
@@ -73,6 +73,7 @@ def make_features(year,conn):
     query = "show tables like \"features_%d\""%year
     a = conn.execute(query)
     if(len(a.fetchall())==0):
+        conn.execute("create table for_features select t1.id,t2.question_id,t2.answer_option,t2.marked,t2.marks,t1.marks_scored from test_start_details t1,test_ques_ans_dtls t2 where t2.test_id=t1.id")
         f1 = conn.execute(text("select question_id,count(answer_option) as correctly_answered from for_features where marks = 3 and marked =1 group by question_id"))
         f2 = conn.execute(text("select question_id,count(answer_option) as incorrectly_answered from for_features where marks = -1 and marked =1 group by question_id"))
         f3 = conn.execute(text("select question_id,count(answer_option) as not_answered from for_features where marked =0 group by question_id"))
