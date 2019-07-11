@@ -1,0 +1,784 @@
+\documentclass[a4paper,12pt,oneside]{book}
+
+%-------------------------------Start of the Preable------------------------------------------------
+\usepackage[english]{babel}
+\usepackage{blindtext}
+%packagr for hyperlinks
+\usepackage{hyperref}
+\usepackage{listings}
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    filecolor=magenta,      
+    urlcolor=cyan,
+}
+
+\urlstyle{same}
+%use of package fancy header
+\usepackage{fancyhdr}
+\setlength\headheight{26pt}
+\fancyhf{}
+%\rhead{\includegraphics[width=1cm]{logo}}
+\lhead{\rightmark}
+\rhead{\includegraphics[width=1cm]{logo}}
+\fancyfoot[RE, RO]{\thepage}
+\fancyfoot[CE, CO]{\href{http://www.e-yantra.org}{www.e-yantra.org}}
+
+\pagestyle{fancy}
+
+%use of package for section title formatting
+\usepackage{titlesec}
+\titleformat{\chapter}
+  {\Large\bfseries} % format
+  {}                % label
+  {0pt}             % sep
+  {\huge}           % before-code
+ 
+%use of package tcolorbox for colorful textbox
+\usepackage[most]{tcolorbox}
+\tcbset{colback=cyan!5!white,colframe=cyan!75!black,halign title = flush center}
+
+\newtcolorbox{mybox}[1]{colback=cyan!5!white,
+colframe=cyan!75!black,fonttitle=\bfseries,
+title=\textbf{\Large{#1}}}
+
+%use of package marginnote for notes in margin
+\usepackage{marginnote}
+
+%use of packgage watermark for pages
+%\usepackage{draftwatermark}
+%\SetWatermarkText{\includegraphics{logo}}
+\usepackage[scale=2,opacity=0.1,angle=0]{background}
+\backgroundsetup{
+contents={\includegraphics{logo}}
+}
+
+%use of newcommand for keywords color
+\usepackage{xcolor}
+\newcommand{\keyword}[1]{\textcolor{red}{\textbf{#1}}}
+
+%package for inserting pictures
+\usepackage{graphicx}
+
+%package for highlighting
+\usepackage{color,soul}
+
+%new command for table
+\newcommand{\head}[1]{\textnormal{\textbf{#1}}}
+
+ 
+\definecolor{codegreen}{rgb}{0,0.6,0}
+\definecolor{codegray}{rgb}{0.5,0.5,0.5}
+\definecolor{codepurple}{rgb}{0.58,0,0.82}
+\definecolor{backcolour}{rgb}{0.95,0.95,0.92}
+ 
+\lstdefinestyle{mystyle}{
+    backgroundcolor=\color{backcolour},   
+    commentstyle=\color{codegreen},
+    keywordstyle=\color{magenta},
+    numberstyle=\tiny\color{codegray},
+    stringstyle=\color{codepurple},
+    basicstyle=\ttfamily\footnotesize,
+    breakatwhitespace=false,         
+    breaklines=true,                 
+    captionpos=b,                    
+    keepspaces=true,                 
+    numbers=left,                    
+    numbersep=5pt,                  
+    showspaces=false,                
+    showstringspaces=false,
+    showtabs=false,                  
+    tabsize=2
+}
+ 
+\lstset{style=mystyle}
+
+\definecolor{lightgray}{rgb}{.9,.9,.9}
+\definecolor{darkgray}{rgb}{.4,.4,.4}
+\definecolor{purple}{rgb}{0.65, 0.12, 0.82}
+
+\lstdefinelanguage{JavaScript}{
+  keywords={break, case, catch, continue, debugger, default, delete, do, else, finally, for, function, if, in, instanceof, new, return, switch, this, throw, try, typeof, var, void, while, with},
+  keywordstyle=\color{blue}\bfseries,
+  ndkeywords={class, export, boolean, throw, implements, import, this},
+  ndkeywordstyle=\color{darkgray}\bfseries,
+  identifierstyle=\color{black},
+  sensitive=false,
+  comment=[l]{//},
+  morecomment=[s]{/*}{*/},
+  commentstyle=\color{purple}\ttfamily,
+  stringstyle=\color{red}\ttfamily,
+  morestring=[b]',
+  morestring=[b]"
+}
+
+\lstset{
+   language=JavaScript,
+   backgroundcolor=\color{lightgray},
+   extendedchars=true,
+   basicstyle=\footnotesize\ttfamily,
+   showstringspaces=false,
+   showspaces=false,
+   numbers=left,
+   numberstyle=\footnotesize,
+   numbersep=9pt,
+   tabsize=2,
+   breaklines=true,
+   showtabs=false,
+   captionpos=b
+}
+
+
+%----------------------End of the Preamble---------------------------------------
+
+
+\begin{document}
+
+%---------------------Title Page------------------------------------------------
+\begin{titlepage}
+\raggedright
+{\Large e-YSIP 2019\\[1cm]}
+{\Huge\scshape Auto Tagging Algorithm 2.0 \\[.1in]}
+\vfill
+\begin{flushright}
+{\large Anuj Trehan\\}
+
+{\large Sharad Mishra, Tenzin Dhekyong\\}
+{\large Duration of Internship: $ 03/06/2019-15/07/2019 $ \\}
+\end{flushright}
+
+{\itshape 2019, e-Yantra Publication}
+\end{titlepage}
+%-------------------------------------------------------------------------------
+
+\chapter[Project Tag]{Auto Tagging Algorithm 2.0}
+\section*{Abstract}
+Main task of any Organisation conducting
+the online/offline Exams is to address the
+challenges faced in ensuring authenticity
+and fairness for Test-Takers to who attempt
+Online Exams. In this project I have came-up
+with an Web-application which will ensure
+that questions are automatically tagged with
+correct difficulty level for next iteration of
+Exam, using various Unsupervised
+Machine Learning and Deep Learning analysis
+on the performance of test-takers for previous
+exam.The Web-app will have a full admin
+dashboard and users to edit the questions and
+apply analysis on difficulty level of the questions
+
+\subsection*{Completion status}
+\begin{itemize}
+    \item Read the reference paperAuto-Tagging for Massive OnlineSelection Tests: Machine Learning to the Rescue.
+    \item Used data points from database with DB connector sqlalchemyORM tool for python.
+    \item Calculated all the features including weighted features given in paper.
+    \item K-Means Clustering algorithm was applied on the normalfeatures and accuracy was calculated.
+    \item K-Means Clustering algorithm was applied on the normalfeatures and accuracy was calculated.
+    \item Self Organizing Maps Algorithms was read and applied on the dataset.
+    \item Results were analyzed.
+    \item Integrated the Models into a Flask REST API.
+    \item Dashboard with user and admin authentication was developed.
+    \item Debugging of the Stack for better performance.
+\end{itemize}
+
+
+\section{Software used}
+\begin{itemize}
+  \item The following is the software requirement:- \begin{itemize}
+            \item Operating System used: Ubuntu(18.04LTS).
+            \item MySQL Server.
+            \item Programming languages used: Python\&  NodeJS.
+            \item NumPy.
+            \item SciPy.
+            \item Pandas.
+            \item Matplotlib.
+            \item PyMySQL.
+            \item SQLAlchemy,
+            \item Scikit-learn.
+            \item Tensorflow.
+            \item Flask.
+            \item Flask-SQLAlchemy.
+            \item Flask-Cors.
+            \item Express JS
+            \item Passport JS
+            \item Express-Handlebars
+            \item JQuery
+            \item Bootstrap
+            \item JQuery-datatables
+            \item Sequelize
+            \item mysql
+            \item mysql2
+            \item body-parser
+            \item bcrypt
+            \item virtualenv
+        \end{itemize}
+  \item Versions of different software are:-\begin{itemize}
+      \item MySQL Server: \href{https://linuxize.com/post/how-to-install-mysql-on-ubuntu-18-04/}{This will install latest version for Ubuntu 18.04} follow \href{https://dev.mysql.com/downloads/}{this} for other OS
+      \item Python:\href{https://www.python.org/downloads/release/python-373/}{v3.7.3 (for windows and mac only)}
+      \item NodeJS: \href{https://nodejs.org/}{v12.4.0}
+      \item NumPy: \href{https://pypi.org/project/numpy/}{v1.16.4}
+      \item SciPy: \href{https://pypi.org/project/scipy/}{v1.3.0}
+      \item Pandas: \href{https://pypi.org/project/pandas/}{v0.24.2}
+      \item Matplotlib: \href{https://pypi.org/project/matplotlib/3.1.0/}{v3.1.0}
+      \item PyMySQL: \href{https://pypi.org/project/PyMySQL/}{v0.9.3}
+      \item SQLAlchemy: \href{https://pypi.org/project/SQLAlchemy/1.3.4/}{v1.3.4}
+      \item Scikit-learn: \href{https://pypi.org/project/scikit-learn/}{v0.21.2}
+      \item Tensorflow: \href{https://pypi.org/project/tensorflow/1.13.1/}{v1.13.1}
+      \item Flask: \href{https://pypi.org/project/Flask/}{v1.0.3}
+      \item Flask-SQLAlchemy: \href{https://pypi.org/project/flask-sqlalchemy/}{v2.4.0}
+      \item Flask-Cors: \href{https://pypi.org/project/flask-cors/}{v3.0.8}
+      \item Express JS: \href{https://www.npmjs.com/package/express}{v4.17.1}
+      \item Passport JS: \href{https://www.npmjs.com/package/passport}{v0.4.0}
+      \item Passport-local: \href{https://www.npmjs.com/package/passport-local}{v1.0.0}
+      \item Express-Handlebars: \href{https://www.npmjs.com/package/express-handlebars}{v3.1.0}
+      \item JQuery: \href{https://jquery.com/}{v3.3.1}
+      \item Bootstrap: \href{https://getbootstrap.com/}{v4.3.1}
+      \item JQuery-datatables: \href{https://datatables.net/}{v1.19.1}
+      \item Sequelize: \href{https://www.npmjs.com/package/sequelize}{v5.9.2}
+      \item mysql: \href{https://www.npmjs.com/package/mysql}{v2.17.1}
+      \item mysql2: \href{https://www.npmjs.com/package/mysql2}{v1.6.5}
+      \item body-parser: \href{https://www.npmjs.com/package/body-parser}{v1.19.1}
+      \item bcrypt: \href{https://www.npmjs.com/package/bcrypt}{v3.0.6}
+      \item virtualenv: \href{https://virtualenv.pypa.io/en/latest/changes/#v16-5-0-2019-04-24}{v16.5.0}
+  \end{itemize}
+  
+  \item Follow below mentioned steps for complete installation:- \begin{itemize}
+      \item Follow the steps given \href{https://linuxize.com/post/how-to-install-mysql-on-ubuntu-18-04/}{in this link to install mysql server in ubuntu} or \href{https://dev.mysql.com/downloads/}{follow the guidelines given here for other OS}
+      \item Follow the links given for Python and NodeJS installation in your respective system.
+      \item Install Virtualenv in your system from links given above.
+      \item Then clone the \href{https://github.com/eyantra-eysip/Auto-Tagging-Algorithm-2.0-2019}{Github Repository} into your system
+      \item GO to the \textbf{Auto-Tagging-Algorithm-2.0-2019/Auto-tagger} folder  and open shell/command prompt and run \textbf{npm install package.json} to install all node modules.
+      \item First activate a virtual environment and go to the \textbf{Auto-Tagging-Algorithm-2.0-2019/RESTAPI} folder and open shell/command prompt and run \textbf{pip install -r requirements.txt}.
+  \end{itemize}
+\end{itemize}
+
+
+\section{Software and Code}
+This is the 
+\href{https://github.com/eyantra-eysip/Auto-Tagging-Algorithm-2.0-2019}{Github Link for the project}
+
+The following snippets will walk you through the code for python:-
+\begin{lstlisting}[language=Python, caption= Making Features]
+def make_features(year,conn):
+    '''
+    This is the function for making the feature table for training the model
+    Arguements: year(int): to check which year table is to be created/fetched
+                conn(sqlalchemy connection object): Used by the pandas to fetch data from the database
+
+    We calculate features for the model training and analysis of the questions such as :
+    1. No. of People who solved the given question correctly
+    2. No. of People who solved the given question incorrectly
+    3. No. of People who did not attempt the given question.
+    4. Average Marks of People who solved the given question correctly.
+    5. Average Marks of People who solved the given question incorrectly.
+    6. Average Marks of People who did not attempt the given question.
+    7. Weighted Feature F1.
+    8. Weighted Feature F2.
+    '''
+    query = "show tables like \"features_%d\""%year
+    a = conn.execute(query)
+    if(len(a.fetchall())==0):
+        f1 = conn.execute(text("select question_id,count(answer_option) as correctly_answered from for_features where marks = 3 and marked =1 group by question_id"))
+        f2 = conn.execute(text("select question_id,count(answer_option) as incorrectly_answered from for_features where marks = -1 and marked =1 group by question_id"))
+        f3 = conn.execute(text("select question_id,count(answer_option) as not_answered from for_features where marked =0 group by question_id"))
+        f4 = conn.execute(text("select question_id,avg(marks_scored) as avg_marks_correct from for_features where marks = 3 and marked =1 group by question_id"))
+        f5 = conn.execute(text("select question_id,avg(marks_scored) as avg_marks_incorrect from for_features where marks = -1 and marked =1 group by question_id"))
+        f6 = conn.execute(text("select question_id,avg(marks_scored) as avg_marks_na from for_features where marked =0 group by question_id"))
+    
+        feature1 = pd.DataFrame(f1,columns = f1.keys())
+        feature2 = pd.DataFrame(f2,columns = f2.keys())
+        feature3 = pd.DataFrame(f3,columns = f3.keys())
+        feature4 = pd.DataFrame(f4,columns = f4.keys())
+        feature5 = pd.DataFrame(f5,columns = f5.keys())
+        feature6 = pd.DataFrame(f6,columns = f6.keys())
+        weighted = weighted_features(conn)
+    
+        feature_list = [feature1,feature2,feature3,feature4,feature5,feature6]
+        ques=[x for x in range(1,1801)]
+        i=0
+        features = pd.DataFrame(ques,columns = ["question_id"])
+        while(i<=5):
+            features = pd.merge(features,feature_list[i],on = "question_id")
+            i = i+1
+        features = pd.merge(features,weighted ,on = "question_id")
+        features.to_sql("features_%d"%year,conn)
+        return features
+    else:
+        table_name = "features_%d"%year
+        table = conn.execute("select * from "+table_name)
+        return pd.DataFrame(table,columns = table.keys())
+\end{lstlisting}
+This code snippet is for making the features from the tables in database.It makes features such as no of students who correctly answered the question etc.After making the features pandas store the table in database.(Right now only one database is connected so the year has to remain constant as 2018).\\
+\begin{lstlisting}[language= Python, caption= weighted features]
+def f1(weights_map,marked,sum_weight):
+    '''
+    This function is for caluclating the weighted feature F1
+    Arguements: weights_map(dictionary): a dictionary which maps different students to the weights assigned to them
+                marked(dictionary): to check who are all students who have answered a particular questions
+                sum_weight(float): sum of all weights of the students
+    '''
+    feature_f1=[]
+    sum_ =0
+    for i in marked:
+        if(i==1):
+            for j in marked[i]:
+                if(j[1]==3):
+                    sum_ = sum_+float(weights_map[j[0]])
+            feature_f1.append(sum_/float(sum_weight))
+    
+        elif(i>=2):
+            sum_=0
+            for j in marked[i]:
+                if(j[1]==3):
+                    sum_ = sum_+float(weights_map[j[0]])
+            feature_f1.append(sum_/float(sum_weight))
+    return feature_f1
+def f2(weights_map,marks_map,marked,sum_weight):
+    '''
+    This function is for caluclating the weighted feature F1
+    Arguements: weights_map(dictionary): a dictionary which maps different students to the weights assigned to them
+                marks_map(dictionary): a dictionary which maps students to their marks
+                marked(dictionary): to check who are all students who have answered a particular questions
+                sum_weight(float): sum of all weights of the students
+    '''
+    feature_f2=[]
+    sum_ =0
+    for i in marked:
+        if(i==1):
+            for j in marked[i]:
+                if(j[1]!=3):
+                    sum_ = sum_+(float(weights_map[j[0]])*marks_map[j[0]])
+            feature_f2.append(sum_/float(sum_weight))
+        
+        elif(i>=2):
+            sum_=0
+            for j in marked[i]:
+                if(j[1]!=3):
+                    sum_ = sum_+(float(weights_map[j[0]])*marks_map[j[0]])
+            feature_f2.append(sum_/float(sum_weight))
+    return feature_f2
+\end{lstlisting}
+This code snippet is for making the weighted features suggested in the referenced paper as follows: - \\
+\begin{equation}
+		    F_{k}^{(1)} = \frac{\sum_{s\in S} w_{s} f_{k}^{(1)} (D_{k}^{(s)})}{\sum_{s\in S} w_{s}}
+\end{equation}
+		\\
+\begin{equation}
+    F_{k}^{(2)} = \frac{\sum_{s\in S} w_{s} m_{s} f_{k}^{(2)} (D_{k}^{(s)})}{\sum_{s\in S} w_{s}}
+\end{equation}
+\\
+For \begin{equation}w_{s}\end{equation} in equations 1.1 and 1.2 we have taken a dictionary weights\_map which maps students to their weights.\\
+
+For \begin{equation}m_{s}\end{equation} in equation 1.2 we have taken a dictionary marks\_map which maps students to their weights.\\
+\begin{lstlisting}[language= Python, caption= REST API]
+from flask import Flask,render_template,request
+from flask_sqlalchemy import SQLAlchemy 
+from Feature_functions import *
+from SOM_functions import *
+from accuracy_calc import *
+from stats import *
+import pandas as pd 
+import numpy as np 
+from sklearn.preprocessing import StandardScaler,MinMaxScaler
+from sklearn.cluster import KMeans
+import pickle
+from flask_cors import CORS
+
+app = Flask(__name__) #instantiating the app object 
+cors = CORS(app, resources={r"/*": {"origins": "*"}}) #used for handling calls from nodejs
+ss = StandardScaler()
+kmeans = KMeans(n_clusters = 3,max_iter = 900)#unstantiating KMeans object for clustering
+app.config["SQLALCHEMY_DATABASE_URI"] = "mysql+pymysql://anuj:Anuj@21101998@localhost/auto_tagging_data"
+app.config["SQLALCHEMY_BINDS"] = {
+    'stats' : 'mysql+pymysql://anuj:Anuj@21101998@localhost/stats',
+    
+} #configuring the app with the database
+db = SQLAlchemy(app)
+query = "select pre_tag from question_master"
+a = db.engine.execute(query)
+df = pd.DataFrame(a,columns = a.keys())
+tags = list(df["pre_tag"])#Making the list for pre_tags
+@app.before_request
+def log_request():
+    print(request.headers)
+    return None
+'''
+This is the route for post request in the app.
+Here the machine learning models will be trained on the fly and result will be stored in database
+'''
+@app.route("/",methods = ['GET','POST'])
+
+def predict():  
+    '''
+    This is the function for predicting the results from the features given throuh the form from node js.
+    This will return the message about accuracy score of the models.
+    The results for labels will be stored in stats database.
+    '''
+    names = request.get_json()
+    message = 'ok'
+    print(names)
+    print(names['features'][0])
+    if request.method == "POST":
+        print("inside post call")
+        features = make_features(int(names['features'][0]),db.engine)
+        data = features[names['features'][1:]]
+        data_pp = ss.fit_transform(data)
+        pred_kmeans = kmeans.fit_predict(data_pp)
+        pred_SOM = fit_predict(data_pp)
+        acc_kmeans,kmeans_tag = map_labels(np.array(tags),np.array(pred_kmeans))
+        acc_SOM,SOM_tag = map_labels(np.array(tags),np.array(pred_SOM))
+        print(acc_kmeans,acc_SOM)
+        to_statistics(int(names['features'][0]),kmeans_tag,SOM_tag,acc_kmeans,acc_SOM,tags,db.get_engine(app,"stats"))
+        if(acc_kmeans>acc_SOM):
+            for i in range(1,1801):
+                query = "update question_master set post_tag = "+str(kmeans_tag[i-1])+" where id = "+str(i)
+                db.engine.execute(query)
+        else:
+            for i in range(1,1801):
+                query = "update question_master set post_tag = "+str(SOM_tag[i-1])+" where id = "+str(i)
+                db.engine.execute(query)
+        message = "The Accuracy of Kmeans is "+str(acc_kmeans)+" and accuracy of SOM is "+str(acc_SOM)
+    return message
+if __name__ == "__main__":
+    app.run(port = 5000,debug = True)
+\end{lstlisting}
+This code snippet is for the REST API made in flask. It uses all the functions made up until now to make features,predict and store results from the machine learning models.We configured two databases for the app. One is for the questions and other is for the statistics to be used by express app.It takes in input from NodeJS hosted form for features and uses pandas to extract the database.\\
+\begin{lstlisting}[language = Python, caption = Self Oganizing Map's Functions]
+import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
+
+def get_weights(total_data):
+    '''
+    function for initialize random values in the weight vectors for the neural network to be used.
+    uses the no of features to initialize a vector.
+    '''
+    y = np.random.random()*(2.0/np.sqrt(total_data))
+    return 0.5 - (1/np.sqrt(total_data)) + y 
+    
+def compute_distance(w,x):
+    '''
+    function for computing the distance between the x(data) and w(Weight) vector
+    takes in two arguments 
+    w: weights
+    x: features
+    '''
+    distance=0
+    for i in range(len(w)):
+        distance = distance + (w[i] - x[i])*(w[i] - x[i])
+    distance = np.sqrt(distance)
+    return distance
+    
+def find_closest_to_x(W,x):
+    '''
+    function to calculate the closest x vectors to the w vectors
+    takes in two arguments
+    w: weights
+    x: features
+    '''
+    
+    w = W[0]
+    dist = compute_distance(w,x)
+    i = 0
+    i_n = i
+    for w_ in W:
+        if compute_distance(w_,x)<dist:
+            dist = compute_distance(w_, x)
+            w = w_
+            i_n = i
+        i = i + 1
+    return (w,i_n)
+def fit_predict(data):
+    W=[]
+    n_clusters = 3
+    features = len(data[0])
+    total_data = len(data)
+    for i in range(n_clusters):
+        W.append(list())
+        for j in range(features):
+            W[i].append(get_weights(total_data) * 0.5)
+    la = 0.3   # λ coefficient
+    dla = 0.05  # Δλ
+    '''
+    This code applies the training process defined above for every data point given in the dataset.
+    We run a loop till la is equal to 0. In that we take 10 iterations and find closest datapoint ot the neuron and then
+    updates the value of the wn as in the above equation.
+    '''
+    while la >= 0:
+        for k in range(10):
+            for x in data:
+                wm = find_closest_to_x(W, x)[0]
+                for i in range(len(wm)):
+                    wm[i] = wm[i] + la * (x[i] - wm[i]) 
+        la = la - dla
+    prediction=[]
+    for x in data:
+        i_n = find_closest_to_x(W,x)[1]
+        prediction.append(i_n)
+    return prediction
+\end{lstlisting}
+This code snippet shows the workflow of making the Self Organizing Map which is made on the fly.We have function for intializing the weights,calculating the distance,calculating the shortest distance and for the main algorithm which changes the shape of the map according to the distribution of the data.\\
+\begin{lstlisting}[caption = Login Routes]
+router.get('/login',function(req,res){
+    res.render('login')
+  });
+router.post('/auth',auth_controller.login)
+router.get('/sorry',(req,res)=>{
+    res.redirect('/login');
+  })
+router.get('/',function(req,res){
+  if (req.session.loggedin) {
+      if(req.session.user.role=='admin'){console.log("Inside admin");return res.redirect('/admin')}
+      else{console.log("Inside user");return res.redirect('/user')}
+      } else {
+          res.redirect('/login');
+      }
+});
+
+router.get('/logout', function(req, res, next) {
+    if (req.session) {
+      // delete session object
+      req.session.destroy(function(err) {
+        if(err) {
+          return next(err);
+        } else {
+          return res.redirect('/login');
+        }
+      });
+    }
+  });
+\end{lstlisting}
+\begin{lstlisting}[caption = Auth_Controller]
+login:
+        (req, res, next)=> {
+            console.log('Inside POST /login callback')
+            auth.authenticate('local-login', (err, user, info) => {
+              if(info) {return res.send(info.message)}
+              if (err) { return next(err); }
+              if (!user) { return res.redirect('/sorry'); }
+              req.login(user, (err) => {
+                console.log(user);
+                if (err) { req.session.destroy();
+                  return next(err); 
+                }
+                req.session.loggedin = true;
+                req.session.user = user;
+                // req.session.role=
+                return res.redirect('/');
+            })
+            })(req, res, next);
+          }
+\end{lstlisting}
+The above two code snippets walk you through the workflow of authentication and authorization.This all code handles user login and checks if the user is logged in or not and also checks whether the person is normal user or admin.\\
+\includegraphics[scale = 0.3]{login.png}
+\\
+\begin{lstlisting}[caption=Admin Home]
+router.get('/',admin_middleware,admin_controller.home)
+//admin_controller.home
+home: (req,res)=>{res.render("./admin/home",{username:req.session.user.name})},
+\end{lstlisting}\\
+The above code snippet is for the home page route for the admin.It is a simple page which renders a welcome message to the admin.\\
+\includegraphics[scale=0.3]{admin_home.png}
+\begin{lstlisting}[caption = Users List]
+//route for showing the user data
+router.get('/users',admin_middleware,admin_controller.users);
+//admin_controller.users
+users: (req, res) => {
+        let sql = "SELECT * FROM user_question";
+        let query = conn.query(sql, (err, results) => {
+            if (err) throw err;
+            res.render('./admin/users', {
+                results: results
+            });
+        });
+    },
+\end{lstlisting}
+The above  code snippet walks you through the backend of the users page at admin.
+This page is responsible for the assigning of questions.\\
+\includegraphics[scale =0.3]{User_list.png}\\
+\begin{lstlisting}[caption=Questions list]
+//route for ahowing the question
+router.get('/questions',admin_middleware,admin_controller.questions)
+//admin_controller.questions
+questions: (req, res) => {
+        sequelize2.query("select * from question_master").then((results) => {
+            res.render('./admin/admin_ques', { results: results[0] });
+        })
+},
+\end{lstlisting}\\
+The above code snippet walks you through the backend of the questions page.Here the admin can see the questions with the tags given by question maker and the tags given by algorithms.\\
+\includegraphics[scale= 0.3]{Questions.png}\\
+\begin{lstlisting}[caption=Prediction Form]
+//route for showing the form
+router.get('/predict',admin_middleware,admin_controller.predict);
+//admin_controller.predict
+predict: (req, res) => {
+        var message = ""
+        message = req.query.message
+        res.render("./admin/Predict", { message: message });
+},
+//route for getting the results from the flask REST API via form data
+router.post('/predict',admin_middleware,admin_controller.predict_request);
+//admin_controller.predict_request
+predict_request: (req, res) => {
+
+        var features = [];
+        var message = "Accuraacy";
+        var dummy = [req.body.year,
+        req.body.correctly_answered,
+        req.body.incorretly_answered,
+        req.body.not_answered,
+        req.body.avg_marks_correctly_answered,
+        req.body.avg_marks_incorrectly_answered,
+        req.body.avg_marks_not_answered,
+        req.body.F1,
+        req.body.F2];
+        for (var i = 0; i < dummy.length; i++) {
+            if (dummy[i] != undefined) {
+                features = features.concat(dummy[i]);
+            }
+        }
+        if (features.length === 1) {
+            res.render("./admin/Predict", { message: "Please select atleat 1 feature" });
+        }
+        else {
+
+            axios.post("http://127.0.0.1:5000/", { features }).then(function (response) {
+                console.log(response.data);
+                messsage = response.data;
+                
+            }).catch((err) => {
+                console.log(err.message)
+                return res.redirect('back')
+            }
+            )
+            return res.render("./admin/Predict", { message: "Please head to stats page for insights in result" })
+        }
+},
+\end{lstlisting}
+The above code walks you through the backend of the Predict page which is responsible for communicating with the flask API at backend for retrieving the results from Machine Learning Models.\\
+\includegraphics[scale=0.3]{Predict.png}
+\begin{lstlisting}[caption= Stats Route]
+//route for showing the statistics
+router.get('/stats',admin_middleware,admin_controller.stats);
+//admin_controller.stats
+stats:(req,res)=>{
+        sequelize1.query("select * from stats_2018").then(([results, metadata]) => {
+          // Results will be an empty array and metadata will contain the number of affected rows.
+          let array=[]  
+          return results;
+          //console.log(array);
+          
+         // console.log(metadata[0].KMeans_labels);
+        }).then(results=>{
+          sequelize2.query("select * from features_2018").then(([stats, metadata]) => {
+            // Results will be an empty array and metadata will contain the number of affected rows.
+            let array=[]  
+            res.render("./admin/stats",{data: JSON.stringify(results),stats: JSON.stringify(stats)})
+          })
+          
+      })
+
+  }
+\end{lstlisting}
+The above code walks you through the backend of the stats page which shows stats about model's performance and how the questions are tagged.It shows the accuracy of the models used,the distribution of tags over questions predicted by models and graphs for showing how the tags have changed with the no of students who correctly/incorretly/not answered the questions.\\
+\includegraphics[scale=0.3]{stats1.png}
+\includegraphics[scale=0.3]{stats2.png}
+\includegraphics[scale=0.3]{stats3.png}
+\includegraphics[scale=0.3]{stats4.png}
+\includegraphics[scale=0.3]{stats5.png}
+\includegraphics[scale=0.3]{stats6.png}
+\includegraphics[scale=0.3]{stats7.png}
+\includegraphics[scale=0.3]{stats8.png}\\
+\begin{lstlisting}[caption=User Home Route]
+//home route
+router.get('/',user_middleware,user_controller.home)
+//user_controller.home
+home: (req,res)=>{res.render("./user/home_user",{username:req.session.user.name})},
+\end{lstlisting}
+The above code walks you through the backend for the user home page.\\
+\includegraphics[scale=0.3]{user_home.png}
+\begin{lstlisting}
+//route for showing data
+router.get('/uquestions',user_middleware,user_controller.questions);
+//user_controller.questions
+questions:(req, res) => {
+        let sql = `select question_id from user_question where user_id = ${req.session.user.userid}`;
+            let query = sequelize3.query(sql).then((results0)=>{
+              var results = []
+              for(var i= 0;i<results0[0].length;++i){
+                results.push(results0[0][i].question_id)
+              }
+              question_master.findAll({
+                where:{
+                  id:results
+                }
+              }).then((results1)=>{
+                res.render("./user/questions",{results:results1})
+              })
+            })
+      }
+\end{lstlisting}
+The above code walks you through the backend for questions page at user side where he/she can edit/delete the questions assigned.\\
+\includegraphics[scale=0.3]{user_questions.png}
+\section{Use and Demo}
+Please follow the link to see the demonstration of the setup and web app.\\
+\href{https://www.youtube.com/watch?v=pJj7sUYC_CE&feature=youtu.be}{DEMO video for web app} 
+
+\section{Future Work}
+The following can be tried in future to make the project better:-
+\begin{itemize}
+    \item Discovering about other algorithms like Autoencoders ans other deep learning algorithms.
+    \item Making the frontend in React/Vue or any other frontend library for better design.
+    \item Imporve the performance of the REST API to scale better.
+\end{itemize}
+
+\section{Bug report and Challenges}
+BUG REPORT
+\begin{itemize}
+    \item Since the App is based on one database which belongs to questions of 2018 the predict form will work only when 2018 as year will be given.
+    \item The Database which stores the User ID and Question ID does not have a primary key. So redundancy can occur there.
+    \item If as admin you entered User ID which is not in the User's Database no check  functionality will be performed.
+\end{itemize}
+Challenges Faced
+\begin{itemize}
+		
+		\item Understanding the whole database to find out important tables.There were 10 tables in the database but only \textbf{4} of them were needed.\\ 
+		
+		\item Making Features from different tables and import it into python.This was the most important step as it forms the base for our model.\textbf{Good data promises good models.}\\ 
+		
+		\item Calculating the features from research paper was time consuming. Firstly we have to \textbf{calculate weights for each student and also map each question to the students who answered them} and then calculate the features.Shown below are  equations :- \\
+		\begin{equation}
+		    F_{k}^{(1)} = \frac{\sum_{s\in S} w_{s} f_{k}^{(1)} (D_{k}^{(s)})}{\sum_{s\in S} w_{s}}
+		\end{equation}
+		\\
+		\begin{equation}
+		    F_{k}^{(2)} = \frac{\sum_{s\in S} w_{s} m_{s} f_{k}^{(2)} (D_{k}^{(s)})}{\sum_{s\in S} w_{s}}
+		\end{equation}
+		\item Very little knowledge of web development was a hurdle when making the Web App.
+	\end{itemize}
+\begin{thebibliography}{li}
+\bibitem{wavelan97}
+Ad Kamerman and Leo Monteban,
+{\em WaveLAN-II: A High-Performance Wireless LAN for the Unlicensed band},
+1997.
+\bibitem{auto_tagging}
+S.Krithivasan, S.Gupta, S.Shandilya, K.Arya, K.Lala, {\em Auto-Tagging for Massive Online Selection Tests: Machine Learning to the Rescue},2016
+\bibitem{e-Yantra}
+S. Krithivasan, S. Shandilya, K. Arya, K. Lala, P. Manavar,
+S. Patil, and S. Jain, “Learning by competing and competing by
+learning - experience from the e-yantra robotics competition,”
+In IEEE Frontier In Education (FIE), 2014, October 2014.
+\bibitem{SelfOrgMaps}
+Blog on Self Organizing Maps,{\href{https://towardsdatascience.com/self-organizing-maps-ff5853a118d4}{https://towardsdatascience.com/self-organizing-maps-ff5853a118d4}}
+\bibitem{passportjs}
+Blog about passport authentication,{\href{https://medium.com/gomycode/authentication-with-passport-js-73ca65b25feb}{https://medium.com/gomycode/authentication-with-passport-js-73ca65b25feb}}
+\bibitem{ae}
+Blog about Autoencoder Clustering,{\href{https://www.dlology.com/blog/how-to-do-unsupervised-clustering-with-keras/}{https://www.dlology.com/blog/how-to-do-unsupervised-clustering-with-keras/}}
+\bibitem{sqldocs}
+Documentation for FlaskSQLAlchemy,{\href{https://flask-sqlalchemy-session.readthedocs.io/en/v1.1/}{https://flask-sqlalchemy-session.readthedocs.io/en/v1.1/}}
+\end{thebibliography}
+\end{document}
+
+
