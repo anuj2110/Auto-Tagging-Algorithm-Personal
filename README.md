@@ -14,12 +14,12 @@
   ```
 - Now activate a virtual environment if you have already otherwise make it and head on to **Auto-Tagging-Algorithm-2.0-2019/RESTAPI** and run the following to install python libraries
   ```
-  $ pip install -r requirements.txt
+  (env_name)$ pip install -r requirements.txt
   ```
 ### Usage Guide
 - First go to **Auto-Tagging-Algorithm-2.0-2019/RESTAPI** and run 
   ```
-  $ python app.py
+  (env_name)$ python app.py
   ```
 - Then head on to **Auto-Tagging-Algorithm-2.0-2019/Auto-tagger** and run
   ```
