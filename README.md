@@ -34,4 +34,4 @@
 ### NOTE:- IT MAY TAKE A LITTLE WHILE ON THE FIRST RUN TO EXECUTE EVERY THING FROM SCRATCH
 ### follow the demo below
 
-- [![](http://img.youtube.com/vi/pJj7sUYC_CE/0.jpg)](http://www.youtube.com/watch?v=pJj7sUYC_CE "")
+[![](http://img.youtube.com/vi/1c7lb20vC40/0.jpg)](http://www.youtube.com/watch?v=1c7lb20vC40 "")
