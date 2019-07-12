@@ -95,13 +95,13 @@ module.exports = {
             axios.post("http://127.0.0.1:5000/", { features }).then(function (response) {
                 console.log(response.data);
                 messsage = response.data;
-                
+                return res.render("./admin/Predict", {message2: "Please head to stats page for insights in result" })
             }).catch((err) => {
                 console.log(err.message)
                 return res.redirect('back')
             }
             )
-            return res.render("./admin/Predict", {message2: "Please head to stats page for insights in result" })
+            
         }
     },
     stats:(req,res)=>{
