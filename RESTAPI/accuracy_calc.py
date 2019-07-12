@@ -3,7 +3,7 @@ from sklearn.metrics import normalized_mutual_info_score, adjusted_rand_score
 
 nmi = normalized_mutual_info_score
 ari = adjusted_rand_score
-
+from scipy.optimize import linear_sum_assignment
 
 def map_SOM(y_true, y_pred):
     """
@@ -21,7 +21,7 @@ def map_SOM(y_true, y_pred):
     for i in range(y_pred.size):
         w[y_pred[i], y_true[i]] += 1
     from sklearn.utils.linear_assignment_ import linear_assignment
-    ind = linear_assignment(w.max()- w)
+    ind = linear_assignment(- w)
     accuracy = sum([w[i, j] for i, j in ind]) * 1.0 / y_pred.size
     dict = {}
     for i in range(0,y_pred.max()+1):
